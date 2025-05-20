@@ -10,6 +10,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [activeSkillTab, setActiveSkillTab] = useState("webdev")
+  const [activeJourneyTab, setActiveJourneyTab] = useState("experience")
   
   // Update active section based on scroll position
   useEffect(() => {
@@ -969,6 +970,209 @@ export default function Home() {
                     <polyline points="15 3 21 3 21 9"></polyline>
                     <line x1="10" y1="14" x2="21" y2="3"></line>
                   </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Journey Section */}
+        <section id="journey" className="section">
+          <div className="container-custom">
+            {/* Section heading */}
+            <div className="flex flex-col items-center text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">My Journey</h2>
+              <div className="w-12 h-1 bg-primary rounded-full"></div>
+            </div>
+            
+            <div className="max-w-4xl mx-auto">
+              {/* Timeline tabs */}
+              <div className="flex justify-center mb-10 border border-border rounded-md overflow-hidden">
+                <button 
+                  className={`px-8 py-3 font-medium transition-colors ${
+                    activeJourneyTab === 'experience' 
+                      ? 'bg-primary text-white' 
+                      : 'text-muted-foreground hover:bg-card/60'
+                  }`}
+                  onClick={() => setActiveJourneyTab('experience')}
+                >
+                  Experience
+                </button>
+                <button 
+                  className={`px-8 py-3 font-medium transition-colors ${
+                    activeJourneyTab === 'education' 
+                      ? 'bg-primary text-white' 
+                      : 'text-muted-foreground hover:bg-card/60'
+                  }`}
+                  onClick={() => setActiveJourneyTab('education')}
+                >
+                  Education
+                </button>
+              </div>
+              
+              {/* Experience Timeline */}
+              {activeJourneyTab === 'experience' && (
+                <div className="space-y-6">
+                  {/* Timeline Item - 1 */}
+                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
+                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                        <div>
+                          <h3 className="text-lg font-bold">Senior AI Engineer</h3>
+                          <h4 className="text-base text-primary">Innovative AI Solutions</h4>
+                        </div>
+                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                          2021 - Present
+                        </span>
+                      </div>
+                      <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
+                        <li>Led development of large-scale ML systems</li>
+                        <li>Designed and implemented NLP solutions</li>
+                        <li>Mentored junior engineers on best practices</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  {/* Timeline Item - 2 */}
+                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
+                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                        <div>
+                          <h3 className="text-lg font-bold">Machine Learning Engineer</h3>
+                          <h4 className="text-base text-primary">Tech Innovations Inc</h4>
+                        </div>
+                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                          2018 - 2021
+                        </span>
+                      </div>
+                      <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
+                        <li>Developed computer vision models for product recognition</li>
+                        <li>Optimized ML models for production environments</li>
+                        <li>Collaborated with cross-functional teams to deliver solutions</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  {/* Timeline Item - 3 */}
+                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
+                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                        <div>
+                          <h3 className="text-lg font-bold">Frontend Developer</h3>
+                          <h4 className="text-base text-primary">WebCraft Solutions</h4>
+                        </div>
+                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                          2016 - 2018
+                        </span>
+                      </div>
+                      <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
+                        <li>Built responsive web applications using React</li>
+                        <li>Implemented state management with Redux</li>
+                        <li>Developed reusable component libraries</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  {/* Timeline Item - 4 */}
+                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
+                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                        <div>
+                          <h3 className="text-lg font-bold">UI/UX Designer</h3>
+                          <h4 className="text-base text-primary">Creative Design Studio</h4>
+                        </div>
+                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                          2014 - 2016
+                        </span>
+                      </div>
+                      <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
+                        <li>Designed user interfaces for web and mobile applications</li>
+                        <li>Conducted user research and usability testing</li>
+                        <li>Created interactive prototypes using Figma and Adobe XD</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  {/* Last dot to complete the timeline */}
+                  <div className="relative pl-8 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary/50"></div>
+                </div>
+              )}
+              
+              {/* Education Timeline */}
+              {activeJourneyTab === 'education' && (
+                <div className="space-y-6">
+                  {/* Timeline Item - 1 */}
+                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
+                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                        <div>
+                          <h3 className="text-lg font-bold">Master's in Computer Science</h3>
+                          <h4 className="text-base text-primary">Stanford University</h4>
+                        </div>
+                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                          2018 - 2020
+                        </span>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Specialized in Machine Learning and Artificial Intelligence. 
+                        Thesis on Attention Mechanisms in Transformer Models.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Timeline Item - 2 */}
+                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
+                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                        <div>
+                          <h3 className="text-lg font-bold">Bachelor's in Computer Science</h3>
+                          <h4 className="text-base text-primary">MIT</h4>
+                        </div>
+                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                          2014 - 2018
+                        </span>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Graduated with honors. Key courses included Data Structures, 
+                        Algorithms, Software Engineering, and Web Development.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Timeline Item - 3 */}
+                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
+                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                        <div>
+                          <h3 className="text-lg font-bold">Deep Learning Specialization</h3>
+                          <h4 className="text-base text-primary">Coursera (deeplearning.ai)</h4>
+                        </div>
+                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                          2020
+                        </span>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Completed 5-course specialization covering neural networks, 
+                        optimization algorithms, and deep learning applications.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Last dot to complete the timeline */}
+                  <div className="relative pl-8 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary/50"></div>
+                </div>
+              )}
+              
+              {/* Download CV button */}
+              <div className="flex justify-center mt-12">
+                <a 
+                  href="#" 
+                  className="px-6 py-3 bg-primary text-white font-medium inline-flex items-center rounded-md hover:bg-primary/90 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Download Resume
                 </a>
               </div>
             </div>
