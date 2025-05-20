@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ModeToggle } from "@/components/mode-toggle";
+import { ThemeColorToggle } from "@/components/theme-color-toggle";
 import { Menu, X } from "lucide-react";
 
 interface NavItem {
@@ -64,7 +64,7 @@ export function Header() {
         </nav>
         
         <div className="flex items-center space-x-4">
-          <ModeToggle />
+          <ThemeColorToggle />
           
           {/* Mobile menu button */}
           <button 
