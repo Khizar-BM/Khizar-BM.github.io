@@ -9,6 +9,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("home")
   const [menuOpen, setMenuOpen] = useState(false)
   const [showScrollTop, setShowScrollTop] = useState(false)
+  const [activeSkillTab, setActiveSkillTab] = useState("webdev")
   
   // Update active section based on scroll position
   useEffect(() => {
@@ -154,20 +155,302 @@ export default function Home() {
               {/* My skills section */}
               <div>
                 <h3 className="text-2xl font-bold mb-6">My Skills</h3>
-                <div className="flex flex-wrap gap-3">
-                  <span className="px-4 py-2 bg-card text-foreground rounded">HTML</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">CSS</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">JavaScript</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">React</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">Wordpress</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">PHP</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">SASS</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">GIT</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">Github</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">Responsive Design</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">SEO</span>
-                  <span className="px-4 py-2 bg-card text-foreground rounded">Terminal</span>
+                
+                {/* Skill tabs */}
+                <div className="flex mb-6 border-b border-border">
+                  <button 
+                    className={`px-4 py-2 font-medium transition-colors relative ${activeSkillTab === 'webdev' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+                    onClick={() => setActiveSkillTab('webdev')}
+                  >
+                    Web Development
+                    {activeSkillTab === 'webdev' && (
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                    )}
+                  </button>
+                  <button 
+                    className={`px-4 py-2 font-medium transition-colors relative ${activeSkillTab === 'ml' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+                    onClick={() => setActiveSkillTab('ml')}
+                  >
+                    AI & Machine Learning
+                    {activeSkillTab === 'ml' && (
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                    )}
+                  </button>
+                  <button 
+                    className={`px-4 py-2 font-medium transition-colors relative ${activeSkillTab === 'other' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+                    onClick={() => setActiveSkillTab('other')}
+                  >
+                    Other Skills
+                    {activeSkillTab === 'other' && (
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                    )}
+                  </button>
                 </div>
+                
+                {/* Web Development Skills */}
+                {activeSkillTab === 'webdev' && (
+                  <div className="space-y-8">
+                    {/* Frontend */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        Frontend
+                      </h4>
+                      <div className="space-y-3">
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <span className="text-sm font-medium">React</span>
+                            <span className="text-sm font-medium">90%</span>
+                          </div>
+                          <div className="h-2 bg-card rounded-full overflow-hidden">
+                            <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '90%' }}></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <span className="text-sm font-medium">TypeScript</span>
+                            <span className="text-sm font-medium">85%</span>
+                          </div>
+                          <div className="h-2 bg-card rounded-full overflow-hidden">
+                            <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '85%' }}></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <span className="text-sm font-medium">HTML & CSS</span>
+                            <span className="text-sm font-medium">85%</span>
+                          </div>
+                          <div className="h-2 bg-card rounded-full overflow-hidden">
+                            <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '85%' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Backend */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                        </svg>
+                        Backend
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Node.js</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Express</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">RESTful APIs</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Middleware</span>
+                      </div>
+                    </div>
+                    
+                    {/* Libraries & Tools */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                        </svg>
+                        Libraries & Tools
+                      </h4>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Redux</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Next.js</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Tailwind CSS</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">webpack</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">npm</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">JWT</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {/* AI & Machine Learning Skills */}
+                {activeSkillTab === 'ml' && (
+                  <div className="space-y-8">
+                    {/* Core ML */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                        ML Frameworks
+                      </h4>
+                      <div className="space-y-3">
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <span className="text-sm font-medium">TensorFlow</span>
+                            <span className="text-sm font-medium">90%</span>
+                          </div>
+                          <div className="h-2 bg-card rounded-full overflow-hidden">
+                            <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '90%' }}></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <span className="text-sm font-medium">PyTorch</span>
+                            <span className="text-sm font-medium">85%</span>
+                          </div>
+                          <div className="h-2 bg-card rounded-full overflow-hidden">
+                            <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '85%' }}></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <span className="text-sm font-medium">scikit-learn</span>
+                            <span className="text-sm font-medium">90%</span>
+                          </div>
+                          <div className="h-2 bg-card rounded-full overflow-hidden">
+                            <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '90%' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Advanced AI */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                        </svg>
+                        Advanced AI Technologies
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">LLMs</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Agents</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">RAG</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">NLP</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Computer Vision</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Deep Learning</span>
+                      </div>
+                    </div>
+                    
+                    {/* Data Tools */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                        </svg>
+                        Data Science Tools
+                      </h4>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">pandas</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">NumPy</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Matplotlib</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Jupyter</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Python</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Data Viz</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Other Technical Skills */}
+                {activeSkillTab === 'other' && (
+                  <div className="space-y-8">
+                    {/* Databases */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                        </svg>
+                        Database Technologies
+                      </h4>
+                      <div className="space-y-3">
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <span className="text-sm font-medium">SQL</span>
+                            <span className="text-sm font-medium">90%</span>
+                          </div>
+                          <div className="h-2 bg-card rounded-full overflow-hidden">
+                            <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '90%' }}></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <span className="text-sm font-medium">MongoDB</span>
+                            <span className="text-sm font-medium">85%</span>
+                          </div>
+                          <div className="h-2 bg-card rounded-full overflow-hidden">
+                            <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '85%' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* DevOps & Tools */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        DevOps & System Tools
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Git</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Linux</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Bash</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">Docker</span>
+                        <span className="px-4 py-1.5 bg-card text-foreground rounded-full transition-all duration-300 hover:bg-primary/10 hover:translate-y-[-2px]">CI/CD</span>
+                      </div>
+                    </div>
+                    
+                    {/* Additional Skills */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                        </svg>
+                        Additional Skills
+                      </h4>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">RESTful APIs</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">GraphQL</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Authentication</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Cloud Services</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Testing</span>
+                        </div>
+                        <div className="flex items-center p-2 bg-card rounded border border-border hover:border-primary/30 transition-colors">
+                          <span className="font-medium">Agile</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
