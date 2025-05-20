@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ModeToggle } from "@/components/mode-toggle"
 import HeroSection from "@/components/hero-section"
 import { ChevronUp, Menu, X } from "lucide-react"
@@ -39,6 +39,252 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+  
+  // Carousel functionality
+  useEffect(() => {
+    const track = document.getElementById('carousel-track');
+    const prevButton = document.getElementById('carousel-prev');
+    const nextButton = document.getElementById('carousel-next');
+    const dots = document.querySelectorAll('#carousel-dots button');
+    
+    if (!track || !prevButton || !nextButton || dots.length === 0) return;
+    
+    // Calculate visible items based on viewport
+    const calculateVisibleItems = () => {
+      const containerWidth = track.parentElement?.clientWidth || 0;
+      // Calculate based on responsive breakpoints
+      if (containerWidth < 640) {
+        return 1; // Mobile: show 1
+      } else if (containerWidth < 1024) {
+        return 2; // Tablet: show 2
+      } else {
+        return 3; // Desktop: show 3
+      }
+    };
+    
+    let currentPosition = 0;
+    let visibleItems = calculateVisibleItems();
+    
+    const cards = Array.from(track.children);
+    const cardWidth = cards[0]?.getBoundingClientRect().width || 330;
+    const cardMargin = 16; // gap-4 = 16px
+    
+    const totalCards = cards.length;
+    const maxPosition = totalCards - visibleItems;
+    
+    // Move carousel
+    const moveCarousel = (position: number) => {
+      // Clamp the position to valid range
+      currentPosition = Math.max(0, Math.min(position, maxPosition));
+      
+      // Calculate the transform
+      const translateX = currentPosition * (cardWidth + cardMargin);
+      track.style.transition = 'transform 0.5s ease';
+      track.style.transform = `translateX(-${translateX}px)`;
+      
+      // Update active dot
+      dots.forEach((dot, i) => {
+        if (i === currentPosition) {
+          dot.classList.add('bg-primary');
+          dot.classList.remove('bg-card', 'border-border', 'border');
+        } else {
+          dot.classList.remove('bg-primary');
+          dot.classList.add('bg-card', 'border-border', 'border');
+        }
+      });
+      
+      // Update button states - using aria-disabled instead of disabled property
+      if (currentPosition === 0) {
+        prevButton.setAttribute('aria-disabled', 'true');
+        prevButton.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        prevButton.setAttribute('aria-disabled', 'false');
+        prevButton.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+      
+      if (currentPosition === maxPosition) {
+        nextButton.setAttribute('aria-disabled', 'true');
+        nextButton.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        nextButton.setAttribute('aria-disabled', 'false');
+        nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    };
+    
+    // Handle window resize
+    const handleResize = () => {
+      const newVisibleItems = calculateVisibleItems();
+      if (newVisibleItems !== visibleItems) {
+        visibleItems = newVisibleItems;
+        moveCarousel(Math.min(currentPosition, totalCards - visibleItems));
+      }
+    };
+    
+    // Set up event listeners
+    const handlePrevClick = () => moveCarousel(currentPosition - 1);
+    const handleNextClick = () => moveCarousel(currentPosition + 1);
+    
+    prevButton.addEventListener('click', handlePrevClick);
+    nextButton.addEventListener('click', handleNextClick);
+    
+    // Set up dot click handlers
+    const dotClickHandlers = Array.from(dots).map((dot, i) => {
+      const handler = () => moveCarousel(i);
+      dot.addEventListener('click', handler);
+      return { dot, handler };
+    });
+    
+    // Add touch support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
+    let startTranslateX = 0;
+    
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+      isDragging = true;
+      startTranslateX = currentPosition * (cardWidth + cardMargin);
+      // Remove transition during dragging for better performance
+      track.style.transition = 'none';
+    };
+    
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging) return;
+      touchEndX = e.touches[0].clientX;
+      const diffX = touchStartX - touchEndX;
+      track.style.transform = `translateX(-${startTranslateX + diffX}px)`;
+    };
+    
+    const handleTouchEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      // Add transition back
+      track.style.transition = 'transform 0.5s ease';
+      
+      const diffX = touchStartX - touchEndX;
+      // Determine if we should move to next or previous slide
+      if (Math.abs(diffX) > 50) { // Threshold of 50px
+        if (diffX > 0) {
+          // Swipe left, move right
+          moveCarousel(currentPosition + 1);
+        } else {
+          // Swipe right, move left
+          moveCarousel(currentPosition - 1);
+        }
+      } else {
+        // Small movement, snap back
+        moveCarousel(currentPosition);
+      }
+    };
+    
+    // Add mouse drag support (similar to touch)
+    let mouseStartX = 0;
+    let mouseEndX = 0;
+    let isMouseDragging = false;
+    
+    const handleMouseDown = (e: MouseEvent) => {
+      mouseStartX = e.clientX;
+      isMouseDragging = true;
+      startTranslateX = currentPosition * (cardWidth + cardMargin);
+      track.style.transition = 'none';
+      track.style.cursor = 'grabbing';
+      // Prevent default drag behavior
+      e.preventDefault();
+    };
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isMouseDragging) return;
+      mouseEndX = e.clientX;
+      const diffX = mouseStartX - mouseEndX;
+      track.style.transform = `translateX(-${startTranslateX + diffX}px)`;
+    };
+    
+    const handleMouseUp = () => {
+      if (!isMouseDragging) return;
+      isMouseDragging = false;
+      
+      track.style.transition = 'transform 0.5s ease';
+      track.style.cursor = 'grab';
+      
+      const diffX = mouseStartX - mouseEndX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          moveCarousel(currentPosition + 1);
+        } else {
+          moveCarousel(currentPosition - 1);
+        }
+      } else {
+        moveCarousel(currentPosition);
+      }
+    };
+    
+    // Handle mouse leaving the window
+    const handleMouseLeave = () => {
+      if (isMouseDragging) {
+        handleMouseUp();
+      }
+    };
+    
+    // Add event listeners for touch and mouse
+    track.addEventListener('touchstart', handleTouchStart as EventListener);
+    track.addEventListener('touchmove', handleTouchMove as EventListener);
+    track.addEventListener('touchend', handleTouchEnd);
+    
+    track.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('mouseleave', handleMouseLeave);
+    
+    window.addEventListener('resize', handleResize);
+    
+    // Initial setup
+    moveCarousel(0);
+    
+    // Add keyboard navigation for accessibility
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only respond to keyboard events when the carousel is in the viewport
+      const rect = track.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+
+      if (!isInViewport) return;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          moveCarousel(currentPosition - 1);
+          e.preventDefault();
+          break;
+        case 'ArrowRight':
+          moveCarousel(currentPosition + 1);
+          e.preventDefault();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    
+    // Clean up
+    return () => {
+      prevButton.removeEventListener('click', handlePrevClick);
+      nextButton.removeEventListener('click', handleNextClick);
+      
+      dotClickHandlers.forEach(({ dot, handler }) => {
+        dot.removeEventListener('click', handler);
+      });
+      
+      track.removeEventListener('touchstart', handleTouchStart as EventListener);
+      track.removeEventListener('touchmove', handleTouchMove as EventListener);
+      track.removeEventListener('touchend', handleTouchEnd);
+      
+      track.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+      
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
   
   // Navigation items
   const navItems = [
@@ -457,66 +703,272 @@ export default function Home() {
         </section>
         
         {/* Projects Section */}
-        <section id="projects" className="section bg-card">
+        <section id="projects" className="section">
           <div className="container-custom">
-            <h2 className="section-title">Projects</h2>
+            {/* Section heading */}
+            <div className="flex flex-col items-center text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">Projects</h2>
+              <div className="w-12 h-1 bg-primary rounded-full"></div>
+            </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Project filters */}
-              <div className="lg:col-span-3 flex flex-wrap gap-3 mb-8">
-                <span className="tag">Machine Learning</span>
-                <span className="tag">SQL</span>
-                <span className="tag">Power BI</span>
-                <span className="tag">RDBMS</span>
-                <span className="tag">Spatial Data Science</span>
-              </div>
-              
-              {/* Project 1 */}
-              <div className="project-card">
-                <div className="aspect-video relative bg-muted flex items-center justify-center">
-                  <span className="text-muted-foreground">Project Image</span>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-medium mb-2">Project Name/Description</h3>
-                  <p className="dark-mode-text text-sm mb-3">Technology used</p>
-                  <div className="flex justify-end">
-                    <a href="#" className="text-primary text-sm">View Details</a>
+            <div className="max-w-4xl mx-auto">
+              {/* Featured Project Card */}
+              <div className="mb-12 overflow-hidden rounded-lg border border-border/40 bg-card hover:shadow-xl transition-all duration-300">
+                <div className="grid grid-cols-1 md:grid-cols-2 h-full">
+                  <div className="overflow-hidden">
+                    <div className="h-full">
+                      <img 
+                        src="https://placehold.co/800x600/111827/FFFFFF?text=Featured+Project" 
+                        alt="Featured Project"
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                  <div className="p-6 flex flex-col">
+                    <div className="mb-4">
+                      <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full mb-2">Featured Project</span>
+                      <h3 className="text-xl font-bold">ML Image Recognition</h3>
+                    </div>
+                    <p className="text-muted-foreground mb-6 flex-grow">
+                      A comprehensive platform for image recognition using state-of-the-art machine learning algorithms with a custom-built UI for easy interaction. Supports multiple ML models and real-time analysis.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">TensorFlow</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">React</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Python</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Computer Vision</span>
+                    </div>
+                    <div className="flex gap-3">
+                      <a href="#" className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-md hover:bg-primary/90 transition-colors flex items-center">
+                        <span>Live Demo</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                      </a>
+                      <a href="#" className="px-4 py-2 bg-card border border-border text-sm font-medium rounded-md hover:bg-card/80 transition-colors flex items-center">
+                        <span>View Code</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
               
-              {/* Project 2 */}
-              <div className="project-card">
-                <div className="aspect-video relative bg-muted flex items-center justify-center">
-                  <span className="text-muted-foreground">Project Image</span>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-medium mb-2">Project Name/Description</h3>
-                  <p className="dark-mode-text text-sm mb-3">Technology used</p>
-                  <div className="flex justify-end">
-                    <a href="#" className="text-primary text-sm">View Details</a>
+              {/* Project Carousel */}
+              <div className="mb-8">
+                <h3 className="text-xl font-bold mb-6">More Projects</h3>
+                
+                {/* Carousel navigation */}
+                <div className="flex justify-between items-center mb-4">
+                  <p className="text-sm text-muted-foreground">Scroll through my other projects</p>
+                  <div className="flex gap-2">
+                    <button 
+                      id="carousel-prev" 
+                      className="p-2 rounded-full bg-card border border-border hover:bg-card/80 transition-colors"
+                      aria-label="Previous slide"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                      </svg>
+                    </button>
+                    <button 
+                      id="carousel-next" 
+                      className="p-2 rounded-full bg-card border border-border hover:bg-card/80 transition-colors"
+                      aria-label="Next slide"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                      </svg>
+                    </button>
                   </div>
+                </div>
+                
+                {/* Carousel container */}
+                <div className="relative overflow-hidden">
+                  <div 
+                    id="carousel-track" 
+                    className="flex gap-4 transition-transform duration-500 ease-out will-change-transform"
+                    style={{ touchAction: 'pan-y' }}
+                  >
+                    {/* Project Card 1 */}
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <img 
+                          src="https://placehold.co/600x450/111827/FFFFFF?text=Project+1" 
+                          alt="Interactive Dashboard"
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="text-lg font-bold mb-2">Interactive Dashboard</h3>
+                        <p className="text-muted-foreground text-sm mb-4">
+                          Real-time analytics dashboard with data visualization.
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">React</span>
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">D3.js</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors" aria-label="View Demo">Live Demo</a>
+                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors" aria-label="View Code">Code</a>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Project Card 2 */}
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <img 
+                          src="https://placehold.co/600x450/111827/FFFFFF?text=Project+2" 
+                          alt="NLP API"
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="text-lg font-bold mb-2">NLP API</h3>
+                        <p className="text-muted-foreground text-sm mb-4">
+                          Advanced NLP API for sentiment analysis and entity recognition.
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Python</span>
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">spaCy</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors" aria-label="View Demo">Live Demo</a>
+                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors" aria-label="View Code">Code</a>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Project Card 3 */}
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <img 
+                          src="https://placehold.co/600x450/111827/FFFFFF?text=Project+3" 
+                          alt="E-commerce App"
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="text-lg font-bold mb-2">E-commerce App</h3>
+                        <p className="text-muted-foreground text-sm mb-4">
+                          Mobile e-commerce app with personalized recommendations.
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">React Native</span>
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Redux</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors" aria-label="View Demo">Live Demo</a>
+                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors" aria-label="View Code">Code</a>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Project Card 4 */}
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <img 
+                          src="https://placehold.co/600x450/111827/FFFFFF?text=Project+4" 
+                          alt="Analytics Platform"
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="text-lg font-bold mb-2">Analytics Platform</h3>
+                        <p className="text-muted-foreground text-sm mb-4">
+                          ML-powered platform predicting trends with actionable insights.
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Python</span>
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">scikit-learn</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors" aria-label="View Demo">Live Demo</a>
+                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors" aria-label="View Code">Code</a>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Project Card 5 */}
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <img 
+                          src="https://placehold.co/600x450/111827/FFFFFF?text=Project+5" 
+                          alt="Task Manager"
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="text-lg font-bold mb-2">Task Manager</h3>
+                        <p className="text-muted-foreground text-sm mb-4">
+                          Task management app with drag-and-drop interface and reminders.
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Vue.js</span>
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Firebase</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors" aria-label="View Demo">Live Demo</a>
+                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors" aria-label="View Code">Code</a>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Project Card 6 */}
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <img 
+                          src="https://placehold.co/600x450/111827/FFFFFF?text=Project+6" 
+                          alt="Chat Application"
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="text-lg font-bold mb-2">Chat Application</h3>
+                        <p className="text-muted-foreground text-sm mb-4">
+                          Real-time chat app with WebSocket integration and file sharing.
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Node.js</span>
+                          <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Socket.io</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors" aria-label="View Demo">Live Demo</a>
+                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors" aria-label="View Code">Code</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Carousel pagination dots */}
+                <div id="carousel-dots" className="flex justify-center gap-2 mt-6">
+                  <button className="w-2 h-2 rounded-full bg-primary" aria-label="Go to slide 1"></button>
+                  <button className="w-2 h-2 rounded-full bg-card border border-border" aria-label="Go to slide 2"></button>
+                  <button className="w-2 h-2 rounded-full bg-card border border-border" aria-label="Go to slide 3"></button>
+                  <button className="w-2 h-2 rounded-full bg-card border border-border" aria-label="Go to slide 4"></button>
                 </div>
               </div>
               
-              {/* Project 3 */}
-              <div className="project-card">
-                <div className="aspect-video relative bg-muted flex items-center justify-center">
-                  <span className="text-muted-foreground">Project Image</span>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-medium mb-2">Project Name/Description</h3>
-                  <p className="dark-mode-text text-sm mb-3">Technology used</p>
-                  <div className="flex justify-end">
-                    <a href="#" className="text-primary text-sm">View Details</a>
-                  </div>
-                </div>
-              </div>
-              
-              {/* More projects button */}
-              <div className="lg:col-span-3 flex justify-center mt-4">
-                <a href="#" className="text-primary border border-primary/50 rounded-sm px-8 py-2 hover:bg-primary/5 transition-colors">
-                  View All
+              {/* View All Projects link */}
+              <div className="flex justify-center">
+                <a 
+                  href="https://github.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-5 py-2 border border-border rounded-md hover:bg-card transition-colors text-sm font-medium flex items-center gap-2"
+                >
+                  <span>View All Projects on GitHub</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
                 </a>
               </div>
             </div>
@@ -654,10 +1106,13 @@ export default function Home() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
               </a>
               <a href="#" aria-label="GitHub">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                </svg>
               </a>
               <a href="#" aria-label="Twitter">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4.5 1.2.3 2.5-.8 3-2 .5z" />
+                </svg>
               </a>
             </div>
           </div>
