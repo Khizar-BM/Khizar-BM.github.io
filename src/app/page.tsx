@@ -1,102 +1,351 @@
 import Image from "next/image";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen">
+      {/* Header/Navbar */}
+      <header className="sticky top-0 z-10 backdrop-blur-sm bg-background/70 border-b">
+        <div className="container mx-auto flex justify-between items-center py-4">
+          <div className="font-bold text-xl">Khizar.dev</div>
+          <nav className="hidden md:flex space-x-6">
+            <a href="#about" className="hover:text-primary transition-colors">About</a>
+            <a href="#skills" className="hover:text-primary transition-colors">Skills</a>
+            <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
+            <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
+          </nav>
+          <div className="flex items-center space-x-4">
+            <ModeToggle />
+            <Button asChild size="sm" className="hidden md:flex">
+              <a href="#contact">Get in touch</a>
+            </Button>
+          </div>
         </div>
+      </header>
+
+      <main>
+        {/* Hero Section */}
+        <section className="container mx-auto py-20 flex flex-col md:flex-row items-center justify-between">
+          <div className="space-y-6 md:w-1/2">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+              Software Engineer<br />
+              <span className="text-primary">& AI Specialist</span>
+            </h1>
+            <p className="text-muted-foreground text-lg max-w-md">
+              Building elegant solutions to complex problems with code and AI technologies.
+            </p>
+            <div className="flex space-x-4 pt-4">
+              <Button asChild>
+                <a href="#projects">View Projects</a>
+              </Button>
+              <Button variant="outline" asChild>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
+              </Button>
+            </div>
+          </div>
+          <div className="mt-8 md:mt-0 md:w-2/5">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden border-4 border-primary/20">
+              {/* Replace with your profile image */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30" />
+              <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold">KM</div>
+            </div>
+          </div>
+        </section>
+
+        <Separator className="container mx-auto" />
+        
+        {/* About Section */}
+        <section id="about" className="container mx-auto py-20">
+          <h2 className="text-3xl font-bold mb-8">About Me</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Background</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  I'm a passionate software engineer with expertise in both traditional software development and modern AI technologies. With a strong foundation in computer science and years of hands-on experience, I build solutions that are not only technically sound but also intuitive and user-friendly.
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>My Approach</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  I believe in writing clean, maintainable code that solves real problems. My experience with AI has taught me to approach challenges from multiple angles, finding innovative solutions that blend traditional programming with cutting-edge machine learning techniques.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        <Separator className="container mx-auto" />
+        
+        {/* Skills Section */}
+        <section id="skills" className="container mx-auto py-20">
+          <h2 className="text-3xl font-bold mb-8">Skills & Expertise</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Frontend Development</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  <Badge>React</Badge>
+                  <Badge>Next.js</Badge>
+                  <Badge>TypeScript</Badge>
+                  <Badge>Tailwind CSS</Badge>
+                  <Badge>HTML/CSS</Badge>
+                  <Badge>UI/UX Design</Badge>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Backend Development</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  <Badge>Node.js</Badge>
+                  <Badge>Python</Badge>
+                  <Badge>Express</Badge>
+                  <Badge>Django</Badge>
+                  <Badge>RESTful APIs</Badge>
+                  <Badge>GraphQL</Badge>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>AI & Machine Learning</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  <Badge>TensorFlow</Badge>
+                  <Badge>PyTorch</Badge>
+                  <Badge>LLMs</Badge>
+                  <Badge>Computer Vision</Badge>
+                  <Badge>NLP</Badge>
+                  <Badge>Data Science</Badge>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        <Separator className="container mx-auto" />
+        
+        {/* Projects Section */}
+        <section id="projects" className="container mx-auto py-20">
+          <h2 className="text-3xl font-bold mb-8">Featured Projects</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Project 1 */}
+            <Card className="overflow-hidden">
+              <div className="h-48 bg-muted flex items-center justify-center">
+                <span className="text-4xl">🤖</span>
+              </div>
+              <CardHeader>
+                <CardTitle>AI-Powered Assistant</CardTitle>
+                <CardDescription>Conversational AI platform</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  A sophisticated conversational agent built with state-of-the-art NLP techniques and LLMs to provide contextual assistance.
+                </p>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <div className="flex space-x-2">
+                  <Badge variant="outline">React</Badge>
+                  <Badge variant="outline">Python</Badge>
+                </div>
+                <Button variant="ghost" size="sm" asChild>
+                  <a href="#" className="text-primary">View</a>
+                </Button>
+              </CardFooter>
+            </Card>
+            
+            {/* Project 2 */}
+            <Card className="overflow-hidden">
+              <div className="h-48 bg-muted flex items-center justify-center">
+                <span className="text-4xl">📊</span>
+              </div>
+              <CardHeader>
+                <CardTitle>Data Visualization Dashboard</CardTitle>
+                <CardDescription>Interactive analytics platform</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  A comprehensive dashboard for visualizing complex datasets with real-time updates and customizable views.
+                </p>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <div className="flex space-x-2">
+                  <Badge variant="outline">D3.js</Badge>
+                  <Badge variant="outline">Node.js</Badge>
+                </div>
+                <Button variant="ghost" size="sm" asChild>
+                  <a href="#" className="text-primary">View</a>
+                </Button>
+              </CardFooter>
+            </Card>
+            
+            {/* Project 3 */}
+            <Card className="overflow-hidden">
+              <div className="h-48 bg-muted flex items-center justify-center">
+                <span className="text-4xl">📱</span>
+              </div>
+              <CardHeader>
+                <CardTitle>Mobile Health App</CardTitle>
+                <CardDescription>Wellness tracking application</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  A mobile application that uses ML algorithms to provide personalized health recommendations and track fitness goals.
+                </p>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <div className="flex space-x-2">
+                  <Badge variant="outline">React Native</Badge>
+                  <Badge variant="outline">TensorFlow</Badge>
+                </div>
+                <Button variant="ghost" size="sm" asChild>
+                  <a href="#" className="text-primary">View</a>
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+        </section>
+
+        <Separator className="container mx-auto" />
+        
+        {/* Contact Section */}
+        <section id="contact" className="container mx-auto py-20">
+          <h2 className="text-3xl font-bold mb-8">Get In Touch</h2>
+          <Card>
+            <CardContent className="pt-6">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-medium">Contact Information</h3>
+                  <p className="text-muted-foreground">Feel free to reach out for collaborations, opportunities, or just to say hello!</p>
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-primary">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                      </svg>
+                      <span>hello@khizar.dev</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-primary">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                      </svg>
+                      <span>San Francisco, CA</span>
+                    </div>
+                  </div>
+                  <div className="flex space-x-4 pt-4">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="icon" asChild>
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                              <svg viewBox="0 0 24 24" className="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" fill="currentColor"/>
+                              </svg>
+                            </a>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>GitHub</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="icon" asChild>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                              <svg viewBox="0 0 24 24" className="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="currentColor"/>
+                              </svg>
+                            </a>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>LinkedIn</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="icon" asChild>
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                              <svg viewBox="0 0 24 24" className="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" fill="currentColor"/>
+                              </svg>
+                            </a>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Twitter</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </div>
+                <div>
+                  <form className="space-y-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <label htmlFor="name" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Name</label>
+                        <input id="name" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="Your name" />
+                      </div>
+                      <div className="space-y-2">
+                        <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
+                        <input id="email" type="email" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="Your email" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="subject" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Subject</label>
+                      <input id="subject" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="Subject" />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="message" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Message</label>
+                      <textarea id="message" className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="Your message"></textarea>
+                    </div>
+                    <Button className="w-full">Send Message</Button>
+                  </form>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="border-t">
+        <div className="container mx-auto py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <p className="text-sm text-muted-foreground">© 2023 Khizar. All rights reserved.</p>
+            </div>
+            <div className="flex space-x-6">
+              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">Privacy Policy</a>
+              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">Terms of Service</a>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
