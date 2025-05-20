@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ScrollToTop } from "@/components/layout/ScrollToTop"
@@ -10,6 +11,7 @@ import { ProjectsSection } from "@/components/projects/ProjectsSection"
 import { JourneySection } from "@/components/journey/JourneySection"
 import { ContactSection } from "@/components/contact/ContactSection"
 import { SectionTitle } from "@/components/ui/SectionTitle"
+import { SectionCornerGlow } from "@/components/background/SectionBackground"
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home")
@@ -37,10 +39,7 @@ export default function Home() {
   }, [])
   
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      {/* Background texture */}
-      <div className="fixed inset-0 bg-noise opacity-30 pointer-events-none z-0"></div>
-      
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">      
       {/* Content */}
       <div className="relative">
         {/* Header/Navbar */}
@@ -48,10 +47,14 @@ export default function Home() {
   
         <main>
           {/* Hero Section */}
-          <HeroSection />
+          <section id="home" className="relative">
+            <SectionCornerGlow position="top-right-bottom-left" section="home" />
+            <HeroSection />
+          </section>
           
           {/* About Me Section */}
           <section id="about" className="section relative">
+            <SectionCornerGlow position="top-left-bottom-right" section="about" />
             <div className="container-custom">
               <SectionTitle 
                 title="About Me"
@@ -93,14 +96,23 @@ export default function Home() {
             </div>
           </section>
           
-          {/* Projects Section */}
-          <ProjectsSection />
+          {/* Projects Section with background */}
+          <section id="projects-wrapper" className="relative">
+            <SectionCornerGlow position="top-right-bottom-left" section="projects" />
+            <ProjectsSection />
+          </section>
           
-          {/* Journey Section */}
-          <JourneySection />
+          {/* Journey Section with background */}
+          <section id="journey-wrapper" className="relative">
+            <SectionCornerGlow position="top-left-bottom-right" section="journey" />
+            <JourneySection />
+          </section>
           
-          {/* Contact Section */}
-          <ContactSection />
+          {/* Contact Section with background */}
+          <section id="contact-wrapper" className="relative">
+            <SectionCornerGlow position="top-right-bottom-left" section="contact" />
+            <ContactSection />
+          </section>
         </main>
   
         {/* Footer */}
