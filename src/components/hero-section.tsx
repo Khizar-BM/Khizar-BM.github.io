@@ -7,10 +7,18 @@ import { ArrowRight } from "lucide-react"
 
 export default function HeroSection() {
   return (
-    <section id="home" className="section bg-background pt-32 md:pt-40 pb-24 relative overflow-hidden">
-      {/* Noise background effect */}
-      <div className="absolute inset-0 bg-noise opacity-30"></div>
+    <section id="home" className="section bg-background pt-32 md:pt-40 pb-24 relative">
+    
       
+      {/* Radial gradient highlight */}
+      <div 
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[800px] max-h-[600px] opacity-[1.5] pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, hsl(var(--primary)/15%) 0%, transparent 60%)'
+        }}
+      ></div>
+      
+      {/* Content */}
       <div className="container-custom relative z-10">
         <div className="flex flex-col items-center justify-center text-center">
           {/* Profile Image */}

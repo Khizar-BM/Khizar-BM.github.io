@@ -39,16 +39,20 @@ export default function Home() {
   }, [])
   
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">      
+    <div className="min-h-screen bg-background text-foreground relative">      
       {/* Content */}
       <div className="relative">
         {/* Header/Navbar */}
         <Header />
   
-        <main>
+        <main className="relative">
+          {/* Hero Background - explicitly placed at the top */}
+          <div className="absolute top-0 left-0 right-0 h-screen">
+            <SectionCornerGlow position="top-right-bottom-left" section="home" />
+          </div>
+          
           {/* Hero Section */}
           <section id="home" className="relative">
-            <SectionCornerGlow position="top-right-bottom-left" section="home" />
             <HeroSection />
           </section>
           
