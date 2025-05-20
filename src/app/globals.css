@@ -34,14 +34,14 @@
     --card: 0 0% 12%;       /* Medium gray for cards */
     --card-foreground: 0 0% 100%;
     
-    --primary: 160 84% 39%; /* Mint green primary */
+    --primary: 175 84% 40%; /* Teal primary */
     --primary-foreground: 0 0% 100%;
     
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 70%;
     
-    --accent: 160 84% 10%;  /* Deep mint accent background */
-    --accent-foreground: 160 84% 60%;
+    --accent: 175 84% 12%;  /* Deep teal accent background */
+    --accent-foreground: 175 84% 60%;
     
     --border: 0 0% 18%;
     --input: 0 0% 18%;
