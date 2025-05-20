@@ -11,40 +11,40 @@
     --card: 0 0% 98%;
     --card-foreground: 0 0% 10%;
     
-    --primary: 214 100% 50%;
+    --primary: 200 15% 45%;
     --primary-foreground: 0 0% 100%;
     
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 20% 45%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
     
-    --accent: 210 40% 90%;
-    --accent-foreground: 222 47% 20%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 20%;
     
-    --border: 214.3 32% 91%;
-    --input: 214.3 32% 91%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
     
     --radius: 4px;
   }
 
   .dark {
     /* Dark theme variables (used by default) */
-    --background: 220 30% 10%;
-    --foreground: 210 20% 98%;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
     
-    --card: 224 30% 11%;
-    --card-foreground: 210 20% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
     
-    --primary: 210 100% 50%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 200 15% 60%;
+    --primary-foreground: 0 0% 98%;
     
-    --muted: 223 30% 15%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
     
-    --accent: 215 30% 25%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
     
-    --border: 216 32% 17%;
-    --input: 216 32% 17%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
   }
 }
 
@@ -144,4 +144,49 @@ h3 {
 /* Scroll to top button */
 .scroll-top {
   @apply fixed bottom-6 right-6 p-2 bg-accent/50 text-foreground rounded-sm z-50 opacity-80 hover:opacity-100 transition-opacity;
+}
+
+/* Background patterns and effects */
+.bg-grid {
+  background-size: 30px 30px;
+  background-image: 
+    linear-gradient(to right, hsl(var(--border)/5) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--border)/5) 1px, transparent 1px);
+}
+
+.bg-dots {
+  background-size: 20px 20px;
+  background-image: radial-gradient(
+    hsl(var(--border)/20) 1px,
+    transparent 1px
+  );
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+.bg-gradient-subtle {
+  background: radial-gradient(
+    circle at 50% 150%,
+    hsl(var(--primary)/10) 0%,
+    transparent 65%
+  );
+}
+
+.bg-gradient-vignette {
+  background: radial-gradient(
+    circle at center,
+    transparent 40%,
+    hsl(var(--background)) 140%
+  );
+}
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: hsl(var(--primary)/5);
+  filter: blur(50px);
+  z-index: 0;
+  opacity: 0.6;
 }

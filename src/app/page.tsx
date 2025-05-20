@@ -43,7 +43,6 @@ export default function Home() {
   const navItems = [
     { id: "home", label: "Home" },
     { id: "about", label: "About Me" },
-    { id: "skills", label: "What I Do" },
     { id: "projects", label: "Projects" },
     { id: "journey", label: "Journey" },
     { id: "contact", label: "Let's Work Together" }
@@ -111,73 +110,64 @@ export default function Home() {
         <HeroSection />
         
         {/* About Me Section */}
-        <section id="about" className="section bg-card">
+        <section id="about" className="section">
           <div className="container-custom">
-            <h2 className="section-title">About Me</h2>
-            <div className="max-w-3xl">
-              <p className="dark-mode-text mb-4">
-                Hi there! I'm a data scientist specializing in data analytics, predictive modeling, natural 
-                language processing, and machine learning. With a robust background in Python, SQL, and AI technologies
-                for analyzing datasets, I'm dedicated to helping businesses make informed decisions and stay ahead in 
-                today's data-driven world.
-              </p>
-              <p className="dark-mode-text">
-                I bring a blend of technical expertise, hands-on experience, and a commitment to clear communication 
-                in every project. Whether it's uncovering hidden patterns, predicting future trends, or automating 
-                processes with AI, I deliver results that make a difference.
-              </p>
+            <div className="flex flex-col items-center text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">ABOUT ME</h2>
+              <div className="w-12 h-1 bg-primary rounded-full"></div>
             </div>
-          </div>
-        </section>
-        
-        {/* What I Do Section */}
-        <section id="skills" className="section">
-          <div className="container-custom">
-            <h2 className="section-title">What I Do</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Data Analysis */}
-              <div className="border-card">
-                <div className="mb-4 text-primary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M18.4 15.4c-1.2 0-2.2-1-2.2-2.2s1-2.2 2.2-2.2 2.2 1 2.2 2.2-1 2.2-2.2 2.2Z"/><path d="M13.8 10.6c-1.2 0-2.2-1-2.2-2.2s1-2.2 2.2-2.2 2.2 1 2.2 2.2-1 2.2-2.2 2.2Z"/><path d="M9.2 15.4c-1.2 0-2.2-1-2.2-2.2s1-2.2 2.2-2.2 2.2 1 2.2 2.2-1 2.2-2.2 2.2Z"/></svg>
+            <p className="text-center text-muted-foreground max-w-3xl mx-auto mb-16">
+              Here you will find more information about me, what I do, and my current skills mostly in terms 
+              of programming and technology
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {/* Get to know me section */}
+              <div>
+                <h3 className="text-2xl font-bold mb-6">Get to know me!</h3>
+                <div className="space-y-4 text-muted-foreground">
+                  <p>
+                    I'm a <span className="text-foreground">Frontend Focused Web Developer</span> building and managing the 
+                    front-end of Websites and Web Applications that leads to the success of 
+                    the overall product. Check out some of my work in the <span className="text-foreground">Projects</span> section.
+                  </p>
+                  <p>
+                    I also like sharing content related to the stuff that I have learned over the 
+                    years in <span className="text-foreground">Web Development</span> so it can help other people of the Dev 
+                    Community. Feel free to Connect or Follow me on my <a href="#" className="text-primary hover:underline">Linkedin</a> and 
+                    <a href="#" className="text-primary hover:underline ml-1">Instagram</a> where I post useful content related to Web Development and 
+                    Programming
+                  </p>
+                  <p>
+                    I'm open to <span className="text-foreground">Job</span> opportunities where I can contribute, learn and grow. If 
+                    you have a good opportunity that matches my skills and experience then don't hesitate to <span className="text-foreground">contact</span> me.
+                  </p>
                 </div>
-                <h3 className="text-lg font-medium mb-2">Data Analysis & Visualization</h3>
-                <p className="dark-mode-text text-sm">
-                  From data exploration to actionable insights, I design compelling visualizations and create robust data pipelines for your business needs.
-                </p>
+                <div className="mt-8">
+                  <a href="#contact" className="px-6 py-3 bg-primary text-white font-medium inline-block hover:bg-primary/90 transition-colors">
+                    CONTACT
+                  </a>
+                </div>
               </div>
               
-              {/* Predictive Analytics */}
-              <div className="border-card">
-                <div className="mb-4 text-primary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 12 5.6 5.6a1 1 0 0 0 1.4 0L16 10"/><path d="m15 14 2.3-2.3a1 1 0 0 1 1.4 0L22 15"/></svg>
+              {/* My skills section */}
+              <div>
+                <h3 className="text-2xl font-bold mb-6">My Skills</h3>
+                <div className="flex flex-wrap gap-3">
+                  <span className="px-4 py-2 bg-card text-foreground rounded">HTML</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">CSS</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">JavaScript</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">React</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">Wordpress</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">PHP</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">SASS</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">GIT</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">Github</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">Responsive Design</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">SEO</span>
+                  <span className="px-4 py-2 bg-card text-foreground rounded">Terminal</span>
                 </div>
-                <h3 className="text-lg font-medium mb-2">Predictive Analytics and Forecasting</h3>
-                <p className="dark-mode-text text-sm">
-                  From data to insight, I craft predictive models that navigate patterns, forecast trends, and guide decision-making with precision.
-                </p>
-              </div>
-              
-              {/* NLP */}
-              <div className="border-card">
-                <div className="mb-4 text-primary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15V6a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v9"/><path d="M3 15h18"/><path d="M9 22h6"/><path d="M5 15v-2a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2"/></svg>
-                </div>
-                <h3 className="text-lg font-medium mb-2">Natural Language Processing</h3>
-                <p className="dark-mode-text text-sm">
-                  From text to insight, I craft Natural Language Processing solutions that decode sentiment, extract meaning, and unlock the power of text.
-                </p>
-              </div>
-              
-              {/* AI Chatbots */}
-              <div className="border-card">
-                <div className="mb-4 text-primary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><circle cx="15" cy="15" r="2"/></svg>
-                </div>
-                <h3 className="text-lg font-medium mb-2">AI Chatbots</h3>
-                <p className="dark-mode-text text-sm">
-                  From concept to conversation, I build AI chatbots that enhance customer interactions, streamline support, and solve business objectives.
-                </p>
               </div>
             </div>
           </div>
