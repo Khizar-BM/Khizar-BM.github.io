@@ -37,72 +37,78 @@ export default function Home() {
   }, [])
   
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Header/Navbar */}
-      <Header />
-
-      <main>
-        {/* Hero Section */}
-        <HeroSection />
-        
-        {/* About Me Section */}
-        <section id="about" className="section">
-          <div className="container-custom">
-            <SectionTitle 
-              title="About Me"
-              subtitle="Here you will find more information about me, what I do, and my current skills mostly in terms of programming and technology"
-            />
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {/* Get to know me section */}
-              <div>
-                <h3 className="text-2xl font-bold mb-6">Get to know me!</h3>
-                <div className="space-y-4 text-muted-foreground">
-                  <p>
-                    I'm a <span className="text-foreground">Frontend Focused Web Developer</span> building and managing the 
-                    front-end of Websites and Web Applications that leads to the success of 
-                    the overall product. Check out some of my work in the <span className="text-foreground">Projects</span> section.
-                  </p>
-                  <p>
-                    I also like sharing content related to the stuff that I have learned over the 
-                    years in <span className="text-foreground">Web Development</span> so it can help other people of the Dev 
-                    Community. Feel free to Connect or Follow me on my <a href="#" className="text-primary hover:underline">Linkedin</a> and
-                    <a href="#" className="text-primary hover:underline ml-1">Instagram</a> where I post useful content related to Web Development and 
-                    Programming
-                  </p>
-                  <p>
-                    I'm open to <span className="text-foreground">Job</span> opportunities where I can contribute, learn and grow. If 
-                    you have a good opportunity that matches my skills and experience then don't hesitate to <span className="text-foreground">contact</span> me.
-                  </p>
-                </div>
-                <div className="mt-8">
-                  <a href="#contact" className="px-6 py-3 bg-primary text-white font-medium inline-block hover:bg-primary/90 transition-colors">
-                    CONTACT
-                  </a>
-                </div>
-              </div>
-              
-              {/* My skills section */}
-              <SkillTabs />
-            </div>
-          </div>
-        </section>
-        
-        {/* Projects Section */}
-        <ProjectsSection />
-        
-        {/* Journey Section */}
-        <JourneySection />
-        
-        {/* Contact Section */}
-        <ContactSection />
-      </main>
-
-      {/* Footer */}
-      <Footer />
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+      {/* Background texture */}
+      <div className="fixed inset-0 bg-noise opacity-30 pointer-events-none z-0"></div>
       
-      {/* Scroll to top button */}
-      <ScrollToTop />
+      {/* Content */}
+      <div className="relative">
+        {/* Header/Navbar */}
+        <Header />
+  
+        <main>
+          {/* Hero Section */}
+          <HeroSection />
+          
+          {/* About Me Section */}
+          <section id="about" className="section relative">
+            <div className="container-custom">
+              <SectionTitle 
+                title="About Me"
+                subtitle="Here you will find more information about me, what I do, and my current skills mostly in terms of programming and technology"
+              />
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {/* Get to know me section */}
+                <div>
+                  <h3 className="text-2xl font-bold mb-6">Get to know me!</h3>
+                  <div className="space-y-4 text-muted-foreground">
+                    <p>
+                      I'm a <span className="text-foreground">Frontend Focused Web Developer</span> building and managing the 
+                      front-end of Websites and Web Applications that leads to the success of 
+                      the overall product. Check out some of my work in the <span className="text-foreground">Projects</span> section.
+                    </p>
+                    <p>
+                      I also like sharing content related to the stuff that I have learned over the 
+                      years in <span className="text-foreground">Web Development</span> so it can help other people of the Dev 
+                      Community. Feel free to Connect or Follow me on my <a href="#" className="text-primary hover:underline">Linkedin</a> and
+                      <a href="#" className="text-primary hover:underline ml-1">Instagram</a> where I post useful content related to Web Development and 
+                      Programming
+                    </p>
+                    <p>
+                      I'm open to <span className="text-foreground">Job</span> opportunities where I can contribute, learn and grow. If 
+                      you have a good opportunity that matches my skills and experience then don't hesitate to <span className="text-foreground">contact</span> me.
+                    </p>
+                  </div>
+                  <div className="mt-8">
+                    <a href="#contact" className="btn-primary">
+                      CONTACT
+                    </a>
+                  </div>
+                </div>
+                
+                {/* My skills section */}
+                <SkillTabs />
+              </div>
+            </div>
+          </section>
+          
+          {/* Projects Section */}
+          <ProjectsSection />
+          
+          {/* Journey Section */}
+          <JourneySection />
+          
+          {/* Contact Section */}
+          <ContactSection />
+        </main>
+  
+        {/* Footer */}
+        <Footer />
+        
+        {/* Scroll to top button */}
+        <ScrollToTop />
+      </div>
     </div>
   )
 } 

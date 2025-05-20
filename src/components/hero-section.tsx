@@ -8,18 +8,8 @@ import { ArrowRight } from "lucide-react"
 export default function HeroSection() {
   return (
     <section id="home" className="section bg-background pt-32 md:pt-40 pb-24 relative overflow-hidden">
-      {/* Minimal aesthetic background elements */}
-      <div className="absolute w-full h-full">
-        {/* Subtle gradient backdrop */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background"></div>
-        
-        {/* Enhanced glowing orbs */}
-        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[100px] opacity-80"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-primary/10 blur-[100px] opacity-70"></div>
-        
-        {/* Very subtle noise texture overlay */}
-        <div className="absolute inset-0 bg-noise opacity-[0.03]"></div>
-      </div>
+      {/* Noise background effect */}
+      <div className="absolute inset-0 bg-noise opacity-30"></div>
       
       <div className="container-custom relative z-10">
         <div className="flex flex-col items-center justify-center text-center">
