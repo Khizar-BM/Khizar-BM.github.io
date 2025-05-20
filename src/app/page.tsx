@@ -298,7 +298,7 @@ export default function Home() {
   
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header/Navbar */}
+        {/* Header/Navbar */}
       <header className="fixed top-0 left-0 w-full bg-background/95 border-b border-border z-40">
         <div className="container-custom flex justify-between items-center py-5">
           <a href="#" className="text-xl font-medium">
@@ -307,55 +307,55 @@ export default function Home() {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-6">
-            {navItems.map(item => (
-              <a 
-                key={item.id}
+              {navItems.map(item => (
+                <a 
+                  key={item.id}
                 href={`#${item.id}`}
                 className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          
-          <div className="flex items-center space-x-4">
-            <ModeToggle />
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
             
-            {/* Mobile menu button */}
-            <button 
+            <div className="flex items-center space-x-4">
+              <ModeToggle />
+              
+              {/* Mobile menu button */}
+              <button 
               className="md:hidden"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
-            >
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Toggle menu"
+              >
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+              </button>
+            </div>
           </div>
-        </div>
-        
-        {/* Mobile menu */}
-        {menuOpen && (
+          
+          {/* Mobile menu */}
+            {menuOpen && (
           <div className="md:hidden border-t border-border">
             <div className="container-custom py-4">
               <nav className="flex flex-col space-y-3">
-                {navItems.map(item => (
-                  <a 
-                    key={item.id}
+                  {navItems.map(item => (
+                    <a 
+                      key={item.id}
                     href={`#${item.id}`}
                     className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
                     onClick={() => setMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ))}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
               </nav>
             </div>
-          </div>
-        )}
-      </header>
-      
-      <main>
+                </div>
+            )}
+        </header>
+
+        <main>
         {/* Hero Section */}
-        <HeroSection />
+            <HeroSection />
         
         {/* About Me Section */}
         <section id="about" className="section">
@@ -623,7 +623,7 @@ export default function Home() {
                     <div>
                       <h4 className="text-lg font-semibold mb-3 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
                         </svg>
                         Database Technologies
                       </h4>
@@ -701,8 +701,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
-        
+          </section>
+          
         {/* Projects Section */}
         <section id="projects" className="section">
           <div className="container-custom">
@@ -1012,154 +1012,250 @@ export default function Home() {
               
               {/* Experience Timeline */}
               {activeJourneyTab === 'experience' && (
-                <div className="space-y-6">
-                  {/* Timeline Item - 1 */}
-                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                        <div>
-                          <h3 className="text-lg font-bold">Senior AI Engineer</h3>
-                          <h4 className="text-base text-primary">Innovative AI Solutions</h4>
-                        </div>
-                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
-                          2021 - Present
-                        </span>
-                      </div>
-                      <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
-                        <li>Led development of large-scale ML systems</li>
-                        <li>Designed and implemented NLP solutions</li>
-                        <li>Mentored junior engineers on best practices</li>
-                      </ul>
-                    </div>
+                <div className="relative py-10">
+                  {/* Center timeline */}
+                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-primary/30 transform -translate-x-1/2"></div>
+                  
+                  {/* Timeline start marker */}
+                  <div className="absolute left-1/2 top-0 transform -translate-x-1/2">
+                    <div className="w-3 h-3 rounded-full bg-primary"></div>
                   </div>
                   
-                  {/* Timeline Item - 2 */}
-                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                        <div>
-                          <h3 className="text-lg font-bold">Machine Learning Engineer</h3>
-                          <h4 className="text-base text-primary">Tech Innovations Inc</h4>
+                  {/* Timeline Items */}
+                  <div className="space-y-16 md:space-y-24">
+                    {/* Timeline Item 1 - Right side */}
+                    <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
+                      {/* Empty space for left side */}
+                      <div className="hidden md:block md:col-span-6"></div>
+                      
+                      {/* Timeline connector */}
+                      <div className="absolute left-1/2 top-6 md:top-1/2 w-3 h-3 rounded-full bg-primary transform -translate-x-1/2 md:-translate-y-1/2 z-10"></div>
+                      
+                      {/* Line from center to card - desktop only */}
+                      <div className="hidden md:block absolute left-1/2 top-1/2 w-[calc(6.5%)] bg-primary/70 h-[2px] transform -translate-y-1/2 z-[5]"></div>
+                      
+                      {/* Content - Right side */}
+                      <div className="md:col-span-6 pl-8 md:pl-6 relative z-20">
+                        <div className="bg-card p-6 rounded-lg border border-border/60 shadow-sm transition-all duration-300 relative z-20 hover:shadow-md hover:scale-[1.01] hover:border-primary/20">
+                          <div className="flex flex-col mb-3">
+                            <span className="inline-block px-3 py-1 w-fit text-xs font-medium bg-primary/10 text-primary rounded-full mb-2">
+                              2021 - Present
+                            </span>
+                            <h3 className="text-lg font-bold">Senior AI Engineer</h3>
+                            <h4 className="text-base text-primary">Innovative AI Solutions</h4>
+                          </div>
+                          <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
+                            <li>Led development of large-scale ML systems</li>
+                            <li>Designed and implemented NLP solutions</li>
+                            <li>Mentored junior engineers on best practices</li>
+                          </ul>
                         </div>
-                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
-                          2018 - 2021
-                        </span>
                       </div>
-                      <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
-                        <li>Developed computer vision models for product recognition</li>
-                        <li>Optimized ML models for production environments</li>
-                        <li>Collaborated with cross-functional teams to deliver solutions</li>
-                      </ul>
+                    </div>
+                    
+                    {/* Timeline Item 2 - Left side */}
+                    <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
+                      {/* Content - Left side */}
+                      <div className="md:col-span-6 md:pr-6 relative order-2 md:order-1 pl-8 md:pl-0 z-20">
+                        <div className="bg-card p-6 rounded-lg border border-border/60 shadow-sm transition-all duration-300 relative z-20 hover:shadow-md hover:scale-[1.01] hover:border-primary/20">
+                          <div className="flex flex-col mb-3">
+                            <span className="inline-block px-3 py-1 w-fit text-xs font-medium bg-primary/10 text-primary rounded-full mb-2">
+                              2019 - 2021
+                            </span>
+                            <h3 className="text-lg font-bold">Machine Learning Engineer</h3>
+                            <h4 className="text-base text-primary">AI Research Group</h4>
+                          </div>
+                          <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
+                            <li>Developed computer vision algorithms for autonomous systems</li>
+                            <li>Built and trained deep learning models using PyTorch</li>
+                            <li>Published research papers on image segmentation techniques</li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                      {/* Empty space for right side */}
+                      <div className="hidden md:block md:col-span-6 order-1 md:order-2"></div>
+                      
+                      {/* Timeline connector */}
+                      <div className="absolute left-1/2 top-6 md:top-1/2 w-3 h-3 rounded-full bg-primary transform -translate-x-1/2 md:-translate-y-1/2 z-10"></div>
+                      
+                      {/* Line from center to card - desktop only */}
+                      <div className="hidden md:block absolute right-[calc(50%)] top-1/2 w-[calc(6.5%)] bg-primary/70 h-[2px] transform -translate-y-1/2 z-[5]"></div>
+                    </div>
+                    
+                    {/* Timeline Item 3 - Right side */}
+                    <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
+                      {/* Empty space for left side */}
+                      <div className="hidden md:block md:col-span-6"></div>
+                      
+                      {/* Timeline connector */}
+                      <div className="absolute left-1/2 top-6 md:top-1/2 w-3 h-3 rounded-full bg-primary transform -translate-x-1/2 md:-translate-y-1/2 z-10"></div>
+                      
+                      {/* Line from center to card - desktop only */}
+                      <div className="hidden md:block absolute left-1/2 top-1/2 w-[calc(6.5%)] bg-primary/70 h-[2px] transform -translate-y-1/2 z-[5]"></div>
+                      
+                      {/* Content - Right side */}
+                      <div className="md:col-span-6 pl-8 md:pl-6 relative z-20">
+                        <div className="bg-card p-6 rounded-lg border border-border/60 shadow-sm transition-all duration-300 relative z-20 hover:shadow-md hover:scale-[1.01] hover:border-primary/20">
+                          <div className="flex flex-col mb-3">
+                            <span className="inline-block px-3 py-1 w-fit text-xs font-medium bg-primary/10 text-primary rounded-full mb-2">
+                              2016 - 2019
+                            </span>
+                            <h3 className="text-lg font-bold">Frontend Developer</h3>
+                            <h4 className="text-base text-primary">Web Solutions Inc.</h4>
+                          </div>
+                          <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
+                            <li>Built responsive web applications using React</li>
+                            <li>Implemented state management with Redux</li>
+                            <li>Developed reusable component libraries</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Timeline Item 4 - Left side */}
+                    <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
+                      {/* Content - Left side */}
+                      <div className="md:col-span-6 md:pr-6 relative order-2 md:order-1 pl-8 md:pl-0 z-20">
+                        <div className="bg-card p-6 rounded-lg border border-border/60 shadow-sm transition-all duration-300 relative z-20 hover:shadow-md hover:scale-[1.01] hover:border-primary/20">
+                          <div className="flex flex-col mb-3">
+                            <span className="inline-block px-3 py-1 w-fit text-xs font-medium bg-primary/10 text-primary rounded-full mb-2">
+                              2014 - 2016
+                            </span>
+                            <h3 className="text-lg font-bold">UI/UX Designer</h3>
+                            <h4 className="text-base text-primary">Creative Design Studio</h4>
+                          </div>
+                          <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
+                            <li>Designed user interfaces for web and mobile applications</li>
+                            <li>Conducted user research and usability testing</li>
+                            <li>Created interactive prototypes using Figma and Adobe XD</li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                      {/* Empty space for right side */}
+                      <div className="hidden md:block md:col-span-6 order-1 md:order-2"></div>
+                      
+                      {/* Timeline connector */}
+                      <div className="absolute left-1/2 top-6 md:top-1/2 w-3 h-3 rounded-full bg-primary transform -translate-x-1/2 md:-translate-y-1/2 z-10"></div>
+                      
+                      {/* Line from center to card - desktop only */}
+                      <div className="hidden md:block absolute right-[calc(50%)] top-1/2 w-[calc(6.5%)] bg-primary/70 h-[2px] transform -translate-y-1/2 z-[5]"></div>
+                    </div>
+                    
+                    {/* Timeline end marker */}
+                    <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2">
+                      <div className="w-3 h-3 rounded-full bg-primary"></div>
                     </div>
                   </div>
-                  
-                  {/* Timeline Item - 3 */}
-                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                        <div>
-                          <h3 className="text-lg font-bold">Frontend Developer</h3>
-                          <h4 className="text-base text-primary">WebCraft Solutions</h4>
-                        </div>
-                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
-                          2016 - 2018
-                        </span>
-                      </div>
-                      <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
-                        <li>Built responsive web applications using React</li>
-                        <li>Implemented state management with Redux</li>
-                        <li>Developed reusable component libraries</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  {/* Timeline Item - 4 */}
-                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                        <div>
-                          <h3 className="text-lg font-bold">UI/UX Designer</h3>
-                          <h4 className="text-base text-primary">Creative Design Studio</h4>
-                        </div>
-                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
-                          2014 - 2016
-                        </span>
-                      </div>
-                      <ul className="text-sm space-y-1 text-muted-foreground list-disc list-inside">
-                        <li>Designed user interfaces for web and mobile applications</li>
-                        <li>Conducted user research and usability testing</li>
-                        <li>Created interactive prototypes using Figma and Adobe XD</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  {/* Last dot to complete the timeline */}
-                  <div className="relative pl-8 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary/50"></div>
                 </div>
               )}
               
               {/* Education Timeline */}
               {activeJourneyTab === 'education' && (
-                <div className="space-y-6">
-                  {/* Timeline Item - 1 */}
-                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                        <div>
-                          <h3 className="text-lg font-bold">Master's in Computer Science</h3>
-                          <h4 className="text-base text-primary">Stanford University</h4>
-                        </div>
-                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
-                          2018 - 2020
-                        </span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Specialized in Machine Learning and Artificial Intelligence. 
-                        Thesis on Attention Mechanisms in Transformer Models.
-                      </p>
-                    </div>
+                <div className="relative py-10">
+                  {/* Center timeline */}
+                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-primary/30 transform -translate-x-1/2"></div>
+                  
+                  {/* Timeline start marker */}
+                  <div className="absolute left-1/2 top-0 transform -translate-x-1/2">
+                    <div className="w-3 h-3 rounded-full bg-primary"></div>
                   </div>
                   
-                  {/* Timeline Item - 2 */}
-                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                        <div>
-                          <h3 className="text-lg font-bold">Bachelor's in Computer Science</h3>
-                          <h4 className="text-base text-primary">MIT</h4>
+                  {/* Timeline Items */}
+                  <div className="space-y-16 md:space-y-24">
+                    {/* Timeline Item 1 - Right side */}
+                    <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
+                      {/* Empty space for left side */}
+                      <div className="hidden md:block md:col-span-6"></div>
+                      
+                      {/* Timeline connector */}
+                      <div className="absolute left-1/2 top-6 md:top-1/2 w-3 h-3 rounded-full bg-primary transform -translate-x-1/2 md:-translate-y-1/2 z-10"></div>
+                      
+                      {/* Line from center to card - desktop only */}
+                      <div className="hidden md:block absolute left-1/2 top-1/2 w-[calc(6.5%)] bg-primary/70 h-[2px] transform -translate-y-1/2 z-[5]"></div>
+                      
+                      {/* Content - Right side */}
+                      <div className="md:col-span-6 pl-8 md:pl-6 relative z-20">
+                        <div className="bg-card p-6 rounded-lg border border-border/60 shadow-sm transition-all duration-300 relative z-20 hover:shadow-md hover:scale-[1.01] hover:border-primary/20">
+                          <div className="flex flex-col mb-3">
+                            <span className="inline-block px-3 py-1 w-fit text-xs font-medium bg-primary/10 text-primary rounded-full mb-2">
+                              2018 - 2020
+                            </span>
+                            <h3 className="text-lg font-bold">Master's in Computer Science</h3>
+                            <h4 className="text-base text-primary">Stanford University</h4>
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            Specialized in Machine Learning and Artificial Intelligence. 
+                            Thesis on Attention Mechanisms in Transformer Models.
+                          </p>
                         </div>
-                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
-                          2014 - 2018
-                        </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        Graduated with honors. Key courses included Data Structures, 
-                        Algorithms, Software Engineering, and Web Development.
-                      </p>
+                    </div>
+                    
+                    {/* Timeline Item 2 - Left side */}
+                    <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
+                      {/* Content - Left side */}
+                      <div className="md:col-span-6 md:pr-6 relative order-2 md:order-1 pl-8 md:pl-0 z-20">
+                        <div className="bg-card p-6 rounded-lg border border-border/60 shadow-sm transition-all duration-300 relative z-20 hover:shadow-md hover:scale-[1.01] hover:border-primary/20">
+                          <div className="flex flex-col mb-3">
+                            <span className="inline-block px-3 py-1 w-fit text-xs font-medium bg-primary/10 text-primary rounded-full mb-2">
+                              2014 - 2018
+                            </span>
+                            <h3 className="text-lg font-bold">Bachelor's in Computer Science</h3>
+                            <h4 className="text-base text-primary">MIT</h4>
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            Graduated with honors. Key courses included Data Structures, 
+                            Algorithms, Software Engineering, and Web Development.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Empty space for right side */}
+                      <div className="hidden md:block md:col-span-6 order-1 md:order-2"></div>
+                      
+                      {/* Timeline connector */}
+                      <div className="absolute left-1/2 top-6 md:top-1/2 w-3 h-3 rounded-full bg-primary transform -translate-x-1/2 md:-translate-y-1/2 z-10"></div>
+                      
+                      {/* Line from center to card - desktop only */}
+                      <div className="hidden md:block absolute right-[calc(50%)] top-1/2 w-[calc(6.5%)] bg-primary/70 h-[2px] transform -translate-y-1/2 z-[5]"></div>
+                    </div>
+                    
+                    {/* Timeline Item 3 - Right side */}
+                    <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
+                      {/* Empty space for left side */}
+                      <div className="hidden md:block md:col-span-6"></div>
+                      
+                      {/* Timeline connector */}
+                      <div className="absolute left-1/2 top-6 md:top-1/2 w-3 h-3 rounded-full bg-primary transform -translate-x-1/2 md:-translate-y-1/2 z-10"></div>
+                      
+                      {/* Line from center to card - desktop only */}
+                      <div className="hidden md:block absolute left-1/2 top-1/2 w-[calc(6.5%)] bg-primary/70 h-[2px] transform -translate-y-1/2 z-[5]"></div>
+                      
+                      {/* Content - Right side */}
+                      <div className="md:col-span-6 pl-8 md:pl-6 relative z-20">
+                        <div className="bg-card p-6 rounded-lg border border-border/60 shadow-sm transition-all duration-300 relative z-20 hover:shadow-md hover:scale-[1.01] hover:border-primary/20">
+                          <div className="flex flex-col mb-3">
+                            <span className="inline-block px-3 py-1 w-fit text-xs font-medium bg-primary/10 text-primary rounded-full mb-2">
+                              2020
+                            </span>
+                            <h3 className="text-lg font-bold">Deep Learning Specialization</h3>
+                            <h4 className="text-base text-primary">Coursera (deeplearning.ai)</h4>
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            Completed 5-course specialization covering neural networks, 
+                            optimization algorithms, and deep learning applications.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Timeline end marker */}
+                    <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2">
+                      <div className="w-3 h-3 rounded-full bg-primary"></div>
                     </div>
                   </div>
-                  
-                  {/* Timeline Item - 3 */}
-                  <div className="relative pl-8 pb-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                    <div className="bg-card hover:bg-card/80 p-6 rounded-lg border border-border/60 transition-all duration-300">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                        <div>
-                          <h3 className="text-lg font-bold">Deep Learning Specialization</h3>
-                          <h4 className="text-base text-primary">Coursera (deeplearning.ai)</h4>
-                        </div>
-                        <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
-                          2020
-                        </span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Completed 5-course specialization covering neural networks, 
-                        optimization algorithms, and deep learning applications.
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Last dot to complete the timeline */}
-                  <div className="relative pl-8 before:content-[''] before:absolute before:left-[-5px] before:top-0 before:w-2 before:h-2 before:rounded-full before:bg-primary/50"></div>
                 </div>
               )}
               
@@ -1322,8 +1418,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      
-      {/* Scroll to top button */}
+        
+        {/* Scroll to top button */}
       {showScrollTop && (
         <button 
           className="scroll-top"
@@ -1333,6 +1429,6 @@ export default function Home() {
           <ChevronUp size={18} />
         </button>
       )}
-    </div>
+      </div>
   )
 }
