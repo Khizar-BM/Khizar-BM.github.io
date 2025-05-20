@@ -714,7 +714,7 @@ export default function Home() {
             
             <div className="max-w-4xl mx-auto">
               {/* Featured Project Card */}
-              <div className="mb-12 overflow-hidden rounded-lg border border-border/40 bg-card hover:shadow-xl transition-all duration-300">
+              <div className="mb-12 overflow-hidden rounded-lg border border-border/40 bg-card shadow-sm transition-all duration-300 hover:shadow-md hover:scale-[1.01] hover:border-primary/20">
                 <div className="grid grid-cols-1 md:grid-cols-2 h-full">
                   <div className="overflow-hidden">
                     <div className="h-full">
@@ -796,7 +796,7 @@ export default function Home() {
                     style={{ touchAction: 'pan-y' }}
                   >
                     {/* Project Card 1 */}
-                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20">
                       <div className="aspect-[4/3] overflow-hidden">
                         <img 
                           src="https://placehold.co/600x450/111827/FFFFFF?text=Project+1" 
@@ -805,23 +805,38 @@ export default function Home() {
                         />
                       </div>
                       <div className="p-5">
-                        <h3 className="text-lg font-bold mb-2">Interactive Dashboard</h3>
-                        <p className="text-muted-foreground text-sm mb-4">
-                          Real-time analytics dashboard with data visualization.
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="text-lg font-bold">Interactive Dashboard</h3>
+                          <span className="px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">Web App</span>
+                        </div>
+                        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                          Real-time analytics dashboard with data visualization and customizable widgets.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-4">
                           <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">React</span>
                           <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">D3.js</span>
                         </div>
-                        <div className="flex gap-2">
-                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors" aria-label="View Demo">Live Demo</a>
-                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors" aria-label="View Code">Code</a>
+                        <div className="flex gap-2 pt-2 border-t border-border/30">
+                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors flex items-center gap-1">
+                            <span>Demo</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                              <polyline points="15 3 21 3 21 9"></polyline>
+                              <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                          </a>
+                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors flex items-center gap-1">
+                            <span>Code</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                          </a>
                         </div>
                       </div>
                     </div>
                     
-                    {/* Project Card 2 */}
-                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                    {/* Project Card 2 - Structure the same as Card 1 */}
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20">
                       <div className="aspect-[4/3] overflow-hidden">
                         <img 
                           src="https://placehold.co/600x450/111827/FFFFFF?text=Project+2" 
@@ -830,23 +845,38 @@ export default function Home() {
                         />
                       </div>
                       <div className="p-5">
-                        <h3 className="text-lg font-bold mb-2">NLP API</h3>
-                        <p className="text-muted-foreground text-sm mb-4">
-                          Advanced NLP API for sentiment analysis and entity recognition.
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="text-lg font-bold">NLP API</h3>
+                          <span className="px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">API</span>
+                        </div>
+                        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                          Advanced NLP API for sentiment analysis and entity recognition with real-time processing.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-4">
                           <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">Python</span>
                           <span className="px-2 py-1 text-xs font-medium bg-card border border-border rounded">spaCy</span>
                         </div>
-                        <div className="flex gap-2">
-                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors" aria-label="View Demo">Live Demo</a>
-                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors" aria-label="View Code">Code</a>
+                        <div className="flex gap-2 pt-2 border-t border-border/30">
+                          <a href="#" className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary/90 transition-colors flex items-center gap-1">
+                            <span>Demo</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                              <polyline points="15 3 21 3 21 9"></polyline>
+                              <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                          </a>
+                          <a href="#" className="px-3 py-1.5 bg-card border border-border text-xs font-medium rounded hover:bg-card/80 transition-colors flex items-center gap-1">
+                            <span>Code</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                          </a>
                         </div>
                       </div>
                     </div>
                     
                     {/* Project Card 3 */}
-                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20">
                       <div className="aspect-[4/3] overflow-hidden">
                         <img 
                           src="https://placehold.co/600x450/111827/FFFFFF?text=Project+3" 
@@ -871,7 +901,7 @@ export default function Home() {
                     </div>
                     
                     {/* Project Card 4 */}
-                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20">
                       <div className="aspect-[4/3] overflow-hidden">
                         <img 
                           src="https://placehold.co/600x450/111827/FFFFFF?text=Project+4" 
@@ -896,7 +926,7 @@ export default function Home() {
                     </div>
                     
                     {/* Project Card 5 */}
-                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20">
                       <div className="aspect-[4/3] overflow-hidden">
                         <img 
                           src="https://placehold.co/600x450/111827/FFFFFF?text=Project+5" 
@@ -921,7 +951,7 @@ export default function Home() {
                     </div>
                     
                     {/* Project Card 6 */}
-                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div className="min-w-[280px] w-[calc(100%-2rem)] sm:w-[330px] flex-shrink-0 rounded-lg border border-border/40 bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20">
                       <div className="aspect-[4/3] overflow-hidden">
                         <img 
                           src="https://placehold.co/600x450/111827/FFFFFF?text=Project+6" 
@@ -987,27 +1017,41 @@ export default function Home() {
             
             <div className="max-w-4xl mx-auto">
               {/* Timeline tabs */}
-              <div className="flex justify-center mb-10 border border-border rounded-md overflow-hidden">
-                <button 
-                  className={`px-8 py-3 font-medium transition-colors ${
-                    activeJourneyTab === 'experience' 
-                      ? 'bg-primary text-white' 
-                      : 'text-muted-foreground hover:bg-card/60'
-                  }`}
-                  onClick={() => setActiveJourneyTab('experience')}
-                >
-                  Experience
-                </button>
-                <button 
-                  className={`px-8 py-3 font-medium transition-colors ${
-                    activeJourneyTab === 'education' 
-                      ? 'bg-primary text-white' 
-                      : 'text-muted-foreground hover:bg-card/60'
-                  }`}
-                  onClick={() => setActiveJourneyTab('education')}
-                >
-                  Education
-                </button>
+              <div className="flex justify-center mb-10">
+                <div className="inline-flex bg-card/50 rounded-lg p-1.5 border border-border shadow-sm">
+                  <button 
+                    className={`px-6 py-2.5 rounded-md font-medium transition-all duration-200 ${
+                      activeJourneyTab === 'experience' 
+                        ? 'bg-primary text-white shadow-sm' 
+                        : 'text-muted-foreground hover:text-foreground hover:bg-card/80'
+                    }`}
+                    onClick={() => setActiveJourneyTab('experience')}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                      </svg>
+                      <span>Experience</span>
+                    </div>
+                  </button>
+                  <button 
+                    className={`px-6 py-2.5 rounded-md font-medium transition-all duration-200 ${
+                      activeJourneyTab === 'education' 
+                        ? 'bg-primary text-white shadow-sm' 
+                        : 'text-muted-foreground hover:text-foreground hover:bg-card/80'
+                    }`}
+                    onClick={() => setActiveJourneyTab('education')}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                        <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
+                      </svg>
+                      <span>Education</span>
+                    </div>
+                  </button>
+                </div>
               </div>
               
               {/* Experience Timeline */}
