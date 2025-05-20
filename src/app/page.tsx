@@ -13,6 +13,34 @@ import { ContactSection } from "@/components/contact/ContactSection"
 import { SectionTitle } from "@/components/ui/SectionTitle"
 import { SectionCornerGlow } from "@/components/background/SectionBackground"
 
+// Animation variants
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: { duration: 0.6 }
+  }
+}
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+}
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+}
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home")
   
@@ -39,7 +67,12 @@ export default function Home() {
   }, [])
   
   return (
-    <div className="min-h-screen bg-background text-foreground relative">      
+    <motion.div 
+      className="min-h-screen bg-background text-foreground relative"
+      initial="hidden"
+      animate="visible"
+      variants={fadeIn}
+    >      
       {/* Content */}
       <div className="relative">
         {/* Header/Navbar */}
@@ -52,12 +85,26 @@ export default function Home() {
           </div>
           
           {/* Hero Section */}
-          <section id="home" className="relative">
+          <motion.section 
+            id="home" 
+            className="relative"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeIn}
+            viewport={{ once: true }}
+          >
             <HeroSection />
-          </section>
+          </motion.section>
           
           {/* About Me Section */}
-          <section id="about-wrapper" className="section relative">
+          <motion.section 
+            id="about-wrapper" 
+            className="section relative"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            viewport={{ once: true, margin: "-100px" }}
+          >
             <SectionCornerGlow position="top-left-bottom-right" section="about" />
             <div className="container-custom">
               <SectionTitle 
@@ -65,9 +112,12 @@ export default function Home() {
                 subtitle="Here you will find more information about me, what I do, and my current skills mostly in terms of programming and technology"
               />
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 gap-10"
+                variants={staggerContainer}
+              >
                 {/* Get to know me section */}
-                <div>
+                <motion.div variants={fadeInUp}>
                   <h3 className="text-2xl font-bold mb-6">Get to know me!</h3>
                   <div className="space-y-4 text-muted-foreground">
                     <p>
@@ -92,39 +142,69 @@ export default function Home() {
                       CONTACT
                     </a>
                   </div>
-                </div>
+                </motion.div>
                 
                 {/* My skills section */}
-                <SkillTabs />
-              </div>
+                <motion.div variants={fadeInUp}>
+                  <SkillTabs />
+                </motion.div>
+              </motion.div>
             </div>
-          </section>
+          </motion.section>
           
           {/* Projects Section with background */}
-          <section id="projects-wrapper" className="relative">
+          <motion.section 
+            id="projects-wrapper" 
+            className="relative"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            viewport={{ once: true, margin: "-100px" }}
+          >
             <SectionCornerGlow position="top-right-bottom-left" section="projects" />
             <ProjectsSection />
-          </section>
+          </motion.section>
           
           {/* Journey Section with background */}
-          <section id="journey-wrapper" className="relative">
+          <motion.section 
+            id="journey-wrapper" 
+            className="relative"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            viewport={{ once: true, margin: "-100px" }}
+          >
             <SectionCornerGlow position="top-left-bottom-right" section="journey" />
             <JourneySection />
-          </section>
+          </motion.section>
           
           {/* Contact Section with background */}
-          <section id="contact-wrapper" className="relative">
+          <motion.section 
+            id="contact-wrapper" 
+            className="relative"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            viewport={{ once: true, margin: "-100px" }}
+          >
             <SectionCornerGlow position="top-right-bottom-left" section="contact" />
             <ContactSection />
-          </section>
+          </motion.section>
         </main>
   
         {/* Footer */}
-        <Footer />
+        <motion.footer
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeIn}
+          viewport={{ once: true }}
+        >
+          <Footer />
+        </motion.footer>
         
-        {/* Scroll to top button */}
+        {/* Scroll to top button with animation */}
         <ScrollToTop />
       </div>
-    </div>
+    </motion.div>
   )
 } 

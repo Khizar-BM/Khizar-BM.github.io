@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { ChevronUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function ScrollToTop() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -25,16 +26,35 @@ export function ScrollToTop() {
   };
   
   return (
-    <>
+    <AnimatePresence>
       {showScrollTop && (
-        <button 
+        <motion.button 
           className="scroll-top"
           onClick={scrollToTop}
           aria-label="Scroll to top"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          whileHover={{ 
+            scale: 1.1,
+            backgroundColor: "hsl(var(--primary)/30)",
+            boxShadow: "0 0 15px rgba(var(--primary), 0.3)"
+          }}
+          whileTap={{ scale: 0.95 }}
         >
-          <ChevronUp size={18} />
-        </button>
+          <motion.div
+            animate={{ y: [0, -3, 0] }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: Infinity,
+              repeatType: "loop" 
+            }}
+          >
+            <ChevronUp size={18} />
+          </motion.div>
+        </motion.button>
       )}
-    </>
+    </AnimatePresence>
   );
 } 
