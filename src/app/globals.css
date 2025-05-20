@@ -4,65 +4,47 @@
 
 @layer base {
   :root {
+    /* Light theme variables (not used by default) */
     --background: 0 0% 100%;
-    --foreground: 240 10% 10%;
+    --foreground: 0 0% 10%;
     
-    --primary: 220 100% 50%;
-    --primary-light: 220 100% 95%;
-    --primary-dark: 220 100% 40%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 10%;
     
-    --secondary: 220 15% 40%;
-    --secondary-light: 220 15% 90%;
-    --secondary-dark: 220 15% 30%;
+    --primary: 214 100% 50%;
+    --primary-foreground: 0 0% 100%;
     
-    --accent: 45 100% 60%;
-    --accent-light: 45 100% 90%;
-    --accent-dark: 45 100% 50%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 20% 45%;
     
-    --muted: 240 10% 97%;
-    --muted-foreground: 240 5% 40%;
+    --accent: 210 40% 90%;
+    --accent-foreground: 222 47% 20%;
     
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 10%;
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 10%;
-    
-    --border: 240 10% 90%;
-    --input: 240 10% 90%;
-    
-    --ring: var(--primary);
+    --border: 214.3 32% 91%;
+    --input: 214.3 32% 91%;
     
     --radius: 4px;
   }
 
   .dark {
-    --background: 240 10% 7%;
-    --foreground: 0 0% 95%;
+    /* Dark theme variables (used by default) */
+    --background: 220 30% 10%;
+    --foreground: 210 20% 98%;
     
-    --primary: 220 100% 60%;
-    --primary-light: 220 100% 70%;
-    --primary-dark: 220 100% 50%;
+    --card: 224 30% 11%;
+    --card-foreground: 210 20% 98%;
     
-    --secondary: 220 15% 60%;
-    --secondary-light: 220 15% 70%;
-    --secondary-dark: 220 15% 50%;
+    --primary: 210 100% 50%;
+    --primary-foreground: 210 40% 98%;
     
-    --accent: 45 100% 60%;
-    --accent-light: 45 100% 70%;
-    --accent-dark: 45 100% 50%;
+    --muted: 223 30% 15%;
+    --muted-foreground: 215 20% 65%;
     
-    --muted: 240 10% 12%;
-    --muted-foreground: 240 5% 65%;
+    --accent: 215 30% 25%;
+    --accent-foreground: 210 40% 98%;
     
-    --card: 240 10% 9%;
-    --card-foreground: 0 0% 95%;
-    
-    --popover: 240 10% 9%;
-    --popover-foreground: 0 0% 95%;
-    
-    --border: 240 10% 15%;
-    --input: 240 10% 15%;
+    --border: 216 32% 17%;
+    --input: 216 32% 17%;
   }
 }
 
@@ -73,77 +55,93 @@
   body {
     @apply bg-background text-foreground;
   }
-
-  /* Section styles */
-  section {
-    @apply py-16;
-  }
-
-  h2 {
-    @apply text-2xl font-semibold mb-8;
-  }
 }
 
-/* Minimal styles */
-.simple-card {
-  @apply bg-card border border-border rounded-sm p-5 transition-all duration-200;
+/* ===== CUSTOM STYLES ===== */
+
+/* Section padding */
+.section {
+  @apply py-16 md:py-24;
 }
 
-.simple-card:hover {
-  @apply border-primary/30;
+/* Container */
+.container-custom {
+  @apply max-w-screen-xl mx-auto px-4;
 }
 
-/* Simple button effect */
-.btn-simple {
-  @apply transition-colors duration-200;
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-medium tracking-tight;
 }
 
-.btn-simple:hover {
-  @apply bg-primary/10;
+h1 {
+  @apply text-3xl md:text-4xl;
 }
 
-/* Text highlight */
-.highlight-text {
-  @apply text-primary;
+h2 {
+  @apply text-2xl md:text-3xl;
 }
 
-/* Simple avatar container */
-.avatar-container {
-  @apply rounded-full overflow-hidden border-4 border-background;
-  width: 240px;
-  height: 240px;
+h3 {
+  @apply text-xl md:text-2xl;
 }
 
-/* Minimal section container */
-.section-container {
-  @apply max-w-6xl mx-auto px-4 py-16;
+/* Section title with line */
+.section-title {
+  @apply flex items-center gap-4 mb-8 md:mb-12;
 }
 
-/* Project card */
-.project-card {
-  @apply bg-card rounded-sm border border-border overflow-hidden transition-all duration-200;
-}
-
-.project-card:hover {
-  @apply border-primary/50 shadow-sm;
-}
-
-/* Tag styles */
-.tag {
-  @apply inline-block px-2 py-1 text-xs rounded-sm bg-muted text-muted-foreground mr-2 mb-2;
-}
-
-/* Heading with line */
-.heading-with-line {
-  @apply flex items-center mb-12;
-}
-
-.heading-with-line::after {
+.section-title::after {
   content: "";
-  @apply ml-4 h-px bg-border flex-grow;
+  @apply h-px bg-border flex-1;
 }
 
 /* Dark mode text */
 .dark-mode-text {
-  @apply font-light;
+  @apply text-muted-foreground;
+}
+
+/* Simple border card */
+.border-card {
+  @apply border border-border p-6 rounded-sm bg-card transition-all duration-200;
+}
+
+.border-card:hover {
+  @apply border-primary/20;
+}
+
+/* Avatar */
+.avatar {
+  @apply relative overflow-hidden rounded-full;
+  width: 220px;
+  height: 220px;
+  border: 4px solid hsl(var(--background));
+}
+
+/* Tag */
+.tag {
+  @apply inline-block px-2 py-1 text-xs bg-accent text-accent-foreground rounded-sm mr-2 mb-2;
+}
+
+/* Project card */
+.project-card {
+  @apply border border-border bg-card rounded-sm overflow-hidden transition-all;
+}
+
+.project-card:hover {
+  @apply border-primary/30;
+}
+
+/* Nav link */
+.nav-link {
+  @apply px-2 py-1 text-muted-foreground transition-colors hover:text-foreground;
+}
+
+.nav-link.active {
+  @apply text-primary;
+}
+
+/* Scroll to top button */
+.scroll-top {
+  @apply fixed bottom-6 right-6 p-2 bg-accent/50 text-foreground rounded-sm z-50 opacity-80 hover:opacity-100 transition-opacity;
 }
