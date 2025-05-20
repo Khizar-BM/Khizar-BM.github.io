@@ -348,7 +348,7 @@ export default function Home() {
                     </a>
                   ))}
               </nav>
-            </div>
+                </div>
                 </div>
             )}
         </header>
@@ -1434,9 +1434,9 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
-      
-      {/* Footer */}
+        </main>
+
+        {/* Footer */}
       <footer className="py-6 border-t border-border">
         <div className="container-custom">
           <div className="flex justify-between items-center">
@@ -1458,10 +1458,10 @@ export default function Home() {
                   <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4.5 1.2.3 2.5-.8 3-2 .5z" />
                 </svg>
               </a>
+              </div>
             </div>
           </div>
-        </div>
-      </footer>
+        </footer>
         
         {/* Scroll to top button */}
       {showScrollTop && (
