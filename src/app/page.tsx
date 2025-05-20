@@ -57,7 +57,7 @@ export default function Home() {
           </section>
           
           {/* About Me Section */}
-          <section id="about" className="section relative">
+          <section id="about-wrapper" className="section relative">
             <SectionCornerGlow position="top-left-bottom-right" section="about" />
             <div className="container-custom">
               <SectionTitle 
@@ -88,7 +88,7 @@ export default function Home() {
                     </p>
                   </div>
                   <div className="mt-8">
-                    <a href="#contact" className="btn-primary">
+                    <a href="#contact-wrapper" className="btn-primary">
                       CONTACT
                     </a>
                   </div>

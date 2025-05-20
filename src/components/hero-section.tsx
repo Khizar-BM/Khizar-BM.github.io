@@ -34,7 +34,7 @@ export default function HeroSection() {
           {/* Name & Title */}
           <div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3">
-              Vinay Kumar
+              Khizar Bin Muzaffar
             </h1>
             
             <div className="inline-flex items-center mb-7">

@@ -26,8 +26,30 @@ export function ThemeColorToggle() {
     // Get saved accent from localStorage or use default
     const savedAccent = localStorage.getItem("accentColor") || "teal"
     setCurrentAccent(savedAccent)
-    applyAccentColor(savedAccent)
   }, [])
+
+  // Set default dark and light theme CSS variables
+  const setDefaultThemeVariables = (isDark: boolean) => {
+    const root = document.documentElement
+    
+    if (isDark) {
+      // Reset to default dark theme variables
+      root.style.setProperty("--background", "0 0% 7%")
+      root.style.setProperty("--foreground", "0 0% 100%")
+      root.style.setProperty("--card", "0 0% 12%")
+      root.style.setProperty("--card-foreground", "0 0% 100%")
+      root.style.setProperty("--muted", "0 0% 15%")
+      root.style.setProperty("--muted-foreground", "0 0% 70%")
+      root.style.setProperty("--border", "0 0% 18%")
+      root.style.setProperty("--input", "0 0% 18%")
+    } else {
+      // Reset to default light theme variables
+      root.style.setProperty("--background", "0 0% 100%")
+      root.style.setProperty("--foreground", "0 0% 10%")
+      root.style.setProperty("--card", "0 0% 98%")
+      root.style.setProperty("--card-foreground", "0 0% 10%")
+    }
+  }
 
   // Apply the accent color to the CSS variables
   const applyAccentColor = (accentId: string) => {
@@ -40,6 +62,9 @@ export function ThemeColorToggle() {
     
     // Apply the color based on the current theme mode
     const isDark = resolvedTheme === "dark"
+    
+    // First set the base theme variables for the current mode
+    setDefaultThemeVariables(isDark)
     
     if (isDark) {
       // Dark theme properties
@@ -56,6 +81,17 @@ export function ThemeColorToggle() {
       root.style.setProperty("--border", `${hue} 10% 90%`)
       root.style.setProperty("--input", `${hue} 10% 90%`)
     }
+  }
+
+  // Toggle accent color handler
+  const changeAccentColor = (accentId: string) => {
+    setCurrentAccent(accentId)
+    applyAccentColor(accentId)
+  }
+
+  // Handle theme mode change
+  const changeThemeMode = (mode: string) => {
+    setTheme(mode)
   }
 
   // Update accent color when theme changes
@@ -81,15 +117,15 @@ export function ThemeColorToggle() {
         
         {/* Mode options */}
         <DropdownMenuLabel className="text-xs text-muted-foreground">Mode</DropdownMenuLabel>
-        <DropdownMenuItem onClick={() => setTheme("dark")} className="flex items-center justify-between">
+        <DropdownMenuItem onClick={() => changeThemeMode("dark")} className="flex items-center justify-between">
           Dark
           {resolvedTheme === "dark" && <span className="text-primary">✓</span>}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("light")} className="flex items-center justify-between">
+        <DropdownMenuItem onClick={() => changeThemeMode("light")} className="flex items-center justify-between">
           Light
           {resolvedTheme === "light" && <span className="text-primary">✓</span>}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")} className="flex items-center justify-between">
+        <DropdownMenuItem onClick={() => changeThemeMode("system")} className="flex items-center justify-between">
           System
           {theme === "system" && <span className="text-primary">✓</span>}
         </DropdownMenuItem>
@@ -101,7 +137,7 @@ export function ThemeColorToggle() {
         {themes.map((themeOption) => (
           <DropdownMenuItem 
             key={themeOption.id}
-            onClick={() => applyAccentColor(themeOption.id)}
+            onClick={() => changeAccentColor(themeOption.id)}
             className="flex items-center justify-between"
           >
             <div className="flex items-center gap-2">

@@ -11,10 +11,10 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { id: "home", label: "Home" },
-  { id: "about", label: "About Me" },
-  { id: "projects", label: "Projects" },
-  { id: "journey", label: "Journey" },
-  { id: "contact", label: "Let's Work Together" }
+  { id: "about-wrapper", label: "About" },
+  { id: "projects-wrapper", label: "Projects" },
+  { id: "journey-wrapper", label: "Journey" },
+  { id: "contact-wrapper", label: "Contact" }
 ];
 
 export function Header() {
