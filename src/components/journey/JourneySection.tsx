@@ -3,45 +3,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import ExperienceTimeline from "./ExperienceTimeline";
-import EducationTimeline from "./EducationTimeline";
 import { Download } from "lucide-react";
-
-// Animation variants for content
-const contentVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.4, ease: "easeOut" }
-  },
-  exit: { 
-    opacity: 0, 
-    y: -10,
-    transition: { duration: 0.3 }
-  }
-};
-
-// Button hover animation
-const buttonHoverVariants = {
-  hover: {
-    backgroundColor: "rgba(var(--primary), 0.05)",
-    transition: { duration: 0.2 }
-  },
-  tap: {
-    scale: 0.98,
-    transition: { duration: 0.1 }
-  }
-};
-
-// Button hover animation for main CTA buttons
-const buttonHoverAnimation = {
-  scale: 1.03,
-  transition: { type: "spring", stiffness: 400, damping: 10 }
-};
+import { DynamicTimeline } from "./TimelineComponents";
+import { journeyTabs } from "@/data/journey-data";
+import { contentVariants, buttonHoverVariants, buttonHoverAnimation } from "./TimelineComponents";
 
 export function JourneySection() {
-  const [activeJourneyTab, setActiveJourneyTab] = useState("experience");
+  const [activeJourneyTab, setActiveJourneyTab] = useState(journeyTabs[0].id);
   
   // Function to track resume downloads
   const handleResumeDownload = () => {
@@ -50,6 +18,9 @@ export function JourneySection() {
     // Example: if you have a tracking service
     // analytics.trackEvent('resume_download');
   };
+
+  // Find the active tab data
+  const activeTab = journeyTabs.find(tab => tab.id === activeJourneyTab) || journeyTabs[0];
   
   return (
     <section id="journey" className="section">
@@ -72,72 +43,43 @@ export function JourneySection() {
               viewport={{ once: true }}
             >
               <div className="inline-flex bg-card/50 rounded-lg p-1.5 border border-border shadow-sm">
-                <motion.button 
-                  className={`relative px-6 py-2.5 rounded-md font-medium transition-all duration-200 ${
-                    activeJourneyTab === 'experience' 
-                      ? 'text-accent-foreground hover:bg-card/80' 
-                      : 'text-muted-foreground hover:text-foreground hover:bg-card/80'
-                  }`}
-                  onClick={() => setActiveJourneyTab('experience')}
-                  whileHover="hover"
-                  whileTap="tap"
-                  variants={buttonHoverVariants}
-                >
-                  <div className="flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ${activeJourneyTab === 'experience' ? 'text-accent-foreground' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                    </svg>
-                    <span className={activeJourneyTab === 'experience' ? 'text-accent-foreground font-semibold' : ''}>Experience</span>
-                  </div>
-                </motion.button>
-                <motion.button 
-                  className={`relative px-6 py-2.5 rounded-md font-medium transition-all duration-200 ${
-                    activeJourneyTab === 'education' 
-                      ? 'text-accent-foreground hover:bg-card/80' 
-                      : 'text-muted-foreground hover:text-foreground hover:bg-card/80'
-                  }`}
-                  onClick={() => setActiveJourneyTab('education')}
-                  whileHover="hover"
-                  whileTap="tap"
-                  variants={buttonHoverVariants}
-                >
-                  <div className="flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ${activeJourneyTab === 'education' ? 'text-accent-foreground' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                      <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
-                    </svg>
-                    <span className={activeJourneyTab === 'education' ? 'text-accent-foreground font-semibold' : ''}>Education</span>
-                  </div>
-                </motion.button>
+                {journeyTabs.map((tab) => (
+                  <motion.button 
+                    key={tab.id}
+                    className={`relative px-6 py-2.5 rounded-md font-medium transition-all duration-200 ${
+                      activeJourneyTab === tab.id 
+                        ? 'text-accent-foreground hover:bg-card/80' 
+                        : 'text-muted-foreground hover:text-foreground hover:bg-card/80'
+                    }`}
+                    onClick={() => setActiveJourneyTab(tab.id)}
+                    whileHover="hover"
+                    whileTap="tap"
+                    variants={buttonHoverVariants}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span className={activeJourneyTab === tab.id ? 'text-accent-foreground' : ''}>
+                        {tab.icon}
+                      </span>
+                      <span className={activeJourneyTab === tab.id ? 'text-accent-foreground font-semibold' : ''}>
+                        {tab.label}
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
               </div>
             </motion.div>
             
             {/* Tab content with AnimatePresence for smooth transitions */}
             <AnimatePresence mode="wait">
-              {activeJourneyTab === 'experience' && (
-                <motion.div 
-                  key="experience"
-                  variants={contentVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                >
-                  <ExperienceTimeline />
-                </motion.div>
-              )}
-              
-              {activeJourneyTab === 'education' && (
-                <motion.div 
-                  key="education"
-                  variants={contentVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                >
-                  <EducationTimeline />
-                </motion.div>
-              )}
+              <motion.div 
+                key={activeJourneyTab}
+                variants={contentVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <DynamicTimeline items={activeTab.items} />
+              </motion.div>
             </AnimatePresence>
             
             {/* Download CV button */}

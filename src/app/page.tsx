@@ -121,20 +121,13 @@ export default function Home() {
                   <h3 className="text-2xl font-bold mb-6">Get to know me!</h3>
                   <div className="space-y-4 text-muted-foreground">
                     <p>
-                      I'm a <span className="text-foreground">Frontend Focused Web Developer</span> building and managing the 
-                      front-end of Websites and Web Applications that leads to the success of 
-                      the overall product. Check out some of my work in the <span className="text-foreground">Projects</span> section.
+                      I'm a <span className="text-foreground">Software & AI Engineer</span> specializing in designing and deploying real-world, LLM-powered applications and intelligent agents that drive product success. I have a <span className="text-foreground">double masters</span> in AI and Software Engineering and a <span className="text-foreground">Gold Medal</span> in my undergrad. Check out some of my builds in the <span className="text-foreground">Projects</span> section.
                     </p>
                     <p>
-                      I also like sharing content related to the stuff that I have learned over the 
-                      years in <span className="text-foreground">Web Development</span> so it can help other people of the Dev 
-                      Community. Feel free to Connect or Follow me on my <a href="#" className="text-primary hover:underline">Linkedin</a> and
-                      <a href="#" className="text-primary hover:underline ml-1">Instagram</a> where I post useful content related to Web Development and 
-                      Programming
+                      I also enjoy sharing nuggets from my journey in <span className="text-foreground">AI, machine learning, and full-stack development</span> to help others in the dev community. Feel free to connect or follow me on <a href="https://www.linkedin.com/in/khizar-bin-muzaffar/" target="_blank" className="text-primary hover:underline">LinkedIn</a>, where I post practical insights on all things related to AI and software engineering.
                     </p>
                     <p>
-                      I'm open to <span className="text-foreground">Job</span> opportunities where I can contribute, learn and grow. If 
-                      you have a good opportunity that matches my skills and experience then don't hesitate to <span className="text-foreground">contact</span> me.
+                      I'm open to <span className="text-foreground">job opportunities</span> where I can contribute, learn, and grow. If you have a role that aligns with my skills and experience, don't hesitate to <span className="text-foreground">reach out</span>.
                     </p>
                   </div>
                   <div className="mt-8">

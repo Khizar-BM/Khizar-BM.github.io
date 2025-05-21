@@ -2,58 +2,12 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import WebDevSkills from './skills/WebDevSkills';
-import MLSkills from './skills/MLSkills';
-import OtherSkills from './skills/OtherSkills';
-
-// Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.4 }
-  }
-};
-
-const tabContentVariants = {
-  enter: { 
-    opacity: 0, 
-    y: 10, 
-    transition: { duration: 0.3 } 
-  },
-  center: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.4 } 
-  },
-  exit: { 
-    opacity: 0, 
-    y: -10, 
-    transition: { duration: 0.3 } 
-  }
-};
-
-const underlineVariants = {
-  hidden: { width: 0 },
-  visible: { 
-    width: '100%',
-    transition: { duration: 0.4 }
-  }
-};
+import DynamicSkillCategory from './skills/DynamicSkillCategory';
+import { skillTabs } from '@/data/skills-data';
+import { underlineVariants, containerVariants, itemVariants, tabContentVariants } from './skills/SkillComponents';
 
 export function SkillTabs() {
-  const [activeSkillTab, setActiveSkillTab] = useState('webdev');
+  const [activeSkillTab, setActiveSkillTab] = useState(skillTabs[0].id);
   
   return (
     <motion.div
@@ -73,108 +27,47 @@ export function SkillTabs() {
         className="flex mb-6 border-b border-border"
         variants={itemVariants}
       >
-        <motion.button 
-          className={`px-4 py-2 font-medium transition-colors relative ${
-            activeSkillTab === 'webdev' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
-          }`}
-          onClick={() => setActiveSkillTab('webdev')}
-          whileHover={{ 
-            backgroundColor: "rgba(var(--primary), 0.05)"
-          }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ duration: 0.1 }}
-        >
-          Web Development
-          {activeSkillTab === 'webdev' && (
-            <motion.span 
-              className="absolute bottom-0 left-0 h-0.5 bg-primary"
-              variants={underlineVariants}
-              initial="hidden"
-              animate="visible"
-            ></motion.span>
-          )}
-        </motion.button>
-        <motion.button 
-          className={`px-4 py-2 font-medium transition-colors relative ${
-            activeSkillTab === 'ml' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
-          }`}
-          onClick={() => setActiveSkillTab('ml')}
-          whileHover={{ 
-            backgroundColor: "rgba(var(--primary), 0.05)"
-          }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ duration: 0.1 }}
-        >
-          AI & Machine Learning
-          {activeSkillTab === 'ml' && (
-            <motion.span 
-              className="absolute bottom-0 left-0 h-0.5 bg-primary"
-              variants={underlineVariants}
-              initial="hidden"
-              animate="visible"
-            ></motion.span>
-          )}
-        </motion.button>
-        <motion.button 
-          className={`px-4 py-2 font-medium transition-colors relative ${
-            activeSkillTab === 'other' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
-          }`}
-          onClick={() => setActiveSkillTab('other')}
-          whileHover={{ 
-            backgroundColor: "rgba(var(--primary), 0.05)"
-          }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ duration: 0.1 }}
-        >
-          Other Skills
-          {activeSkillTab === 'other' && (
-            <motion.span 
-              className="absolute bottom-0 left-0 h-0.5 bg-primary"
-              variants={underlineVariants}
-              initial="hidden"
-              animate="visible"
-            ></motion.span>
-          )}
-        </motion.button>
+        {skillTabs.map((tab) => (
+          <motion.button 
+            key={tab.id}
+            className={`px-4 py-2 font-medium transition-colors relative ${
+              activeSkillTab === tab.id ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+            }`}
+            onClick={() => setActiveSkillTab(tab.id)}
+            whileHover={{ 
+              backgroundColor: "rgba(var(--primary), 0.05)"
+            }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.1 }}
+          >
+            {tab.label}
+            {activeSkillTab === tab.id && (
+              <motion.span 
+                className="absolute bottom-0 left-0 h-0.5 bg-primary"
+                variants={underlineVariants}
+                initial="hidden"
+                animate="visible"
+              ></motion.span>
+            )}
+          </motion.button>
+        ))}
       </motion.div>
       
       {/* Tab content with AnimatePresence for smooth transitions */}
       <AnimatePresence mode="wait">
-        {activeSkillTab === 'webdev' && (
-          <motion.div 
-            key="webdev"
-            variants={tabContentVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-          >
-            <WebDevSkills />
-          </motion.div>
-        )}
-        
-        {activeSkillTab === 'ml' && (
-          <motion.div 
-            key="ml"
-            variants={tabContentVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-          >
-            <MLSkills />
-          </motion.div>
-        )}
-        
-        {activeSkillTab === 'other' && (
-          <motion.div 
-            key="other"
-            variants={tabContentVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-          >
-            <OtherSkills />
-          </motion.div>
-        )}
+        {skillTabs.map((tab) => (
+          activeSkillTab === tab.id && (
+            <motion.div 
+              key={tab.id}
+              variants={tabContentVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+            >
+              <DynamicSkillCategory sections={tab.sections} />
+            </motion.div>
+          )
+        ))}
       </AnimatePresence>
     </motion.div>
   );

@@ -98,7 +98,7 @@ export default function ContactInfo() {
           </motion.div>
           <div>
             <p className="text-sm text-muted-foreground">Location</p>
-            <p className="font-medium">San Francisco, CA</p>
+            <p className="font-medium">Turku, Finland</p>
           </div>
         </motion.div>
         
@@ -127,7 +127,7 @@ export default function ContactInfo() {
           </motion.div>
           <div>
             <p className="text-sm text-muted-foreground">Email</p>
-            <p className="font-medium">hello@example.com</p>
+            <p className="font-medium">khizarb@gmail.com</p>
           </div>
         </motion.div>
         
@@ -155,7 +155,7 @@ export default function ContactInfo() {
           </motion.div>
           <div>
             <p className="text-sm text-muted-foreground">Phone</p>
-            <p className="font-medium">+1 (555) 123-4567</p>
+            <p className="font-medium">+46 70 244 09 16</p>
           </div>
         </motion.div>
       </motion.div>
