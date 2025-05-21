@@ -86,8 +86,6 @@ For detailed setup instructions, check the [CONTACT_FORM_SETUP.md](./CONTACT_FOR
 
 ## Deployment
 
-### Deploy to Vercel
-
 This portfolio is designed to be easily deployed to [Vercel](https://vercel.com/):
 
 ```bash
@@ -97,105 +95,6 @@ yarn build
 ```
 
 For other deployment options, refer to the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
-
-### Deploy to GitHub Pages
-
-To deploy this portfolio to GitHub Pages at the root domain:
-
-1. **Update the next.config.mjs file**:
-   ```javascript
-   // next.config.mjs
-   const nextConfig = {
-     output: 'export',
-     // No basePath for root deployment
-     images: {
-       unoptimized: true,
-     },
-   };
-   
-   export default nextConfig;
-   ```
-
-2. **Choose one of these methods to deploy to root**:
-
-   **Option 1: Use your username repository**
-   - Create a repository named exactly `yourusername.github.io` 
-   - This special repository will automatically be served from the root
-   - Your site will be available at `https://yourusername.github.io/`
-
-   **Option 2: Configure a custom domain**
-   - In your repository's Settings > Pages:
-     - Add your custom domain (e.g., `example.com`)
-     - Update your DNS provider with GitHub Pages' IP addresses
-   - Your site will be available at your custom domain
-
-3. **Add GitHub Actions Workflow**:
-   - Create a `.github/workflows/deploy.yml` file in your project:
-   ```yaml
-   name: Deploy to GitHub Pages
-
-   on:
-     push:
-       branches: ["main"]
-     workflow_dispatch:
-
-   permissions:
-     contents: read
-     pages: write
-     id-token: write
-
-   concurrency:
-     group: "pages"
-     cancel-in-progress: false
-
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-         - name: Checkout
-           uses: actions/checkout@v3
-         - name: Setup Node
-           uses: actions/setup-node@v3
-           with:
-             node-version: "18"
-             cache: 'npm'
-         - name: Setup Pages
-           uses: actions/configure-pages@v3
-         - name: Install dependencies
-           run: npm ci
-         - name: Build with Next.js
-           run: npm run build
-         - name: Upload artifact
-           uses: actions/upload-pages-artifact@v2
-           with:
-             path: ./out
-
-     deploy:
-       environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-       runs-on: ubuntu-latest
-       needs: build
-       steps:
-         - name: Deploy to GitHub Pages
-           id: deployment
-           uses: actions/deploy-pages@v2
-   ```
-
-4. **Enable GitHub Pages**:
-   - Go to your repository on GitHub
-   - Navigate to Settings > Pages
-   - Select "GitHub Actions" as the source
-   - Your site will be available at the root of your GitHub Pages URL
-
-5. **Push your changes**:
-   ```bash
-   git add .
-   git commit -m "Configure for GitHub Pages root deployment"
-   git push
-   ```
-
-Once the GitHub Action completes, your portfolio will be available at the root of your GitHub Pages URL.
 
 ## License
 
