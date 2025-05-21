@@ -58,9 +58,9 @@ export function JourneySection() {
             >
               <div className="inline-flex bg-card/50 rounded-lg p-1.5 border border-border shadow-sm">
                 <motion.button 
-                  className={`px-6 py-2.5 rounded-md font-medium transition-all duration-200 ${
+                  className={`relative px-6 py-2.5 rounded-md font-medium transition-all duration-200 ${
                     activeJourneyTab === 'experience' 
-                      ? 'bg-primary text-white shadow-sm' 
+                      ? 'text-accent-foreground hover:bg-card/80' 
                       : 'text-muted-foreground hover:text-foreground hover:bg-card/80'
                   }`}
                   onClick={() => setActiveJourneyTab('experience')}
@@ -69,26 +69,17 @@ export function JourneySection() {
                   variants={buttonHoverVariants}
                 >
                   <div className="flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ${activeJourneyTab === 'experience' ? 'text-accent-foreground' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                       <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                     </svg>
-                    <span>Experience</span>
+                    <span className={activeJourneyTab === 'experience' ? 'text-accent-foreground font-semibold' : ''}>Experience</span>
                   </div>
-                  {activeJourneyTab === 'experience' && (
-                    <motion.span 
-                      className="absolute bottom-0 left-0 h-0.5 w-full bg-white/30"
-                      layoutId="activeTab"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
                 </motion.button>
                 <motion.button 
-                  className={`px-6 py-2.5 rounded-md font-medium transition-all duration-200 ${
+                  className={`relative px-6 py-2.5 rounded-md font-medium transition-all duration-200 ${
                     activeJourneyTab === 'education' 
-                      ? 'bg-primary text-white shadow-sm' 
+                      ? 'text-accent-foreground hover:bg-card/80' 
                       : 'text-muted-foreground hover:text-foreground hover:bg-card/80'
                   }`}
                   onClick={() => setActiveJourneyTab('education')}
@@ -97,21 +88,12 @@ export function JourneySection() {
                   variants={buttonHoverVariants}
                 >
                   <div className="flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ${activeJourneyTab === 'education' ? 'text-accent-foreground' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
                       <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
                     </svg>
-                    <span>Education</span>
+                    <span className={activeJourneyTab === 'education' ? 'text-accent-foreground font-semibold' : ''}>Education</span>
                   </div>
-                  {activeJourneyTab === 'education' && (
-                    <motion.span 
-                      className="absolute bottom-0 left-0 h-0.5 w-full bg-white/30"
-                      layoutId="activeTab"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
                 </motion.button>
               </div>
             </motion.div>
@@ -153,7 +135,7 @@ export function JourneySection() {
             >
               <motion.a 
                 href="#" 
-                className="px-6 py-3 bg-primary text-white font-medium inline-flex items-center rounded-md hover:bg-primary/90 transition-colors"
+                className="px-6 py-3 bg-primary text-white font-medium inline-flex items-center rounded-md hover:bg-accent/90 transition-colors"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}

@@ -84,9 +84,9 @@ export default function HeroSection() {
       ></motion.div>
       
       {/* Content */}
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 max-w-full">
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
@@ -182,7 +182,7 @@ export default function HeroSection() {
             variants={fadeInRight}
           >
             <motion.div 
-              className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[500px] lg:h-[600px] overflow-hidden rounded-2xl"
+              className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[450px] lg:h-[550px] overflow-hidden rounded-2xl"
               animate={{ 
                 boxShadow: [
                   "0 0 30px rgba(0, 0, 0, 0.15)",
@@ -200,7 +200,7 @@ export default function HeroSection() {
                 src="/images/dp.jpeg" 
                 alt="Khizar Bin Muzaffar" 
                 fill
-                sizes="(max-width: 768px) 288px, (max-width: 1024px) 384px, 500px"
+                sizes="(max-width: 768px) 288px, (max-width: 1024px) 384px, 450px"
                 priority
                 style={{
                   objectFit: 'cover',
