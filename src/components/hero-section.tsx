@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Download } from "lucide-react"
 
 // Animation variants
 const fadeIn = {
@@ -70,6 +70,12 @@ const buttonHoverAnimation = {
 }
 
 export default function HeroSection() {
+  // Function to handle resume download
+  const handleResumeDownload = () => {
+    console.log("Resume downloaded from hero section at:", new Date().toISOString());
+    // You can add analytics tracking here if needed
+  };
+  
   return (
     <section id="home" className="section bg-background pt-32 md:pt-40 pb-24 relative overflow-hidden">
       {/* Radial gradient highlight */}
@@ -118,9 +124,7 @@ export default function HeroSection() {
               className="dark-mode-text max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed text-lg"
               variants={fadeInUp}
             >
-              As a passionate data scientist, with expertise in machine learning, AI, and data 
-              analytics, I thrive on the challenges of exploring complex data landscapes and 
-              discovering meaningful patterns that drive innovation.
+              I'm a software engineer who loves AI—especially building practical tools with large language models. I love solving complex logical problems and learning new things. I also play a lot of video games.
             </motion.p>
             
             {/* Buttons */}
@@ -129,14 +133,30 @@ export default function HeroSection() {
               variants={fadeInUp}
             >
               <motion.div whileHover={buttonHoverAnimation}>
-                <Button className="px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+                <Button className="px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors" onClick={() => {
+                  const contactSection = document.getElementById('contact-wrapper');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}>
                   <span>Contact Me</span>
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </motion.div>
               <motion.div whileHover={buttonHoverAnimation}>
-                <Button variant="outline" className="px-8 py-6 border-border hover:border-primary/50 transition-colors">
-                  View Resume
+                <Button 
+                  variant="outline" 
+                  className="px-8 py-6 border-border hover:border-primary/50 transition-colors"
+                  asChild
+                >
+                  <a 
+                    href="/files/Resume_Khizar_Bin_Muzaffar.pdf" 
+                    download="Resume_Khizar_Bin_Muzaffar.pdf"
+                    onClick={handleResumeDownload}
+                  >
+                    <span>View Resume</span>
+                    <Download className="w-4 h-4 ml-1" />
+                  </a>
                 </Button>
               </motion.div>
             </motion.div>
@@ -158,19 +178,19 @@ export default function HeroSection() {
                   className="text-foreground/50 font-medium"
                   whileHover={{ scale: 1.1, color: "hsl(var(--primary))" }}
                 >
-                  COMPANY A
+                  VOLVO CE
                 </motion.div>
                 <motion.div 
                   className="text-foreground/50 font-medium"
                   whileHover={{ scale: 1.1, color: "hsl(var(--primary))" }}
                 >
-                  COMPANY B
+                  AUTOLIV
                 </motion.div>
                 <motion.div 
                   className="text-foreground/50 font-medium"
                   whileHover={{ scale: 1.1, color: "hsl(var(--primary))" }}
                 >
-                  COMPANY C
+                  REMOTEBASE 
                 </motion.div>
               </motion.div>
             </motion.div>

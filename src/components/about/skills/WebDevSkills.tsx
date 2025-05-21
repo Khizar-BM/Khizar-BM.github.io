@@ -34,7 +34,7 @@ const skillCardVariants = {
   hover: {
     scale: 1.02,
     boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-    borderColor: "rgba(var(--primary), 0.3)"
+    borderColor: "hsl(var(--primary) / 0.3)"
   }
 };
 
@@ -70,23 +70,10 @@ const ProgressBar = ({ percentage, label }: { percentage: number, label: string 
       </div>
       <div className="h-2 bg-card rounded-full overflow-hidden">
         <motion.div 
-          className="bg-primary h-full rounded-full relative"
+          className="bg-primary h-full rounded-full"
           initial={{ width: 0 }}
           animate={controls}
-        >
-          <motion.div 
-            className="absolute top-0 bottom-0 right-0 w-4 bg-primary/60"
-            animate={{ 
-              x: [0, 10, 0],
-              opacity: [0.5, 1, 0.5]
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-          />
-        </motion.div>
+        />
       </div>
     </motion.div>
   );
@@ -171,7 +158,14 @@ export default function WebDevSkills() {
             whileHover={{ 
               scale: 1.05, 
               y: -2, 
-              backgroundColor: "rgba(var(--primary), 0.1)" 
+              backgroundColor: "hsl(var(--primary) / 0.1)" 
+            }}
+            initial={{ y: 0 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 10,
+              y: { type: "tween", duration: 0.1 }
             }}
           >
             Node.js
@@ -182,7 +176,14 @@ export default function WebDevSkills() {
             whileHover={{ 
               scale: 1.05, 
               y: -2, 
-              backgroundColor: "rgba(var(--primary), 0.1)" 
+              backgroundColor: "hsl(var(--primary) / 0.1)" 
+            }}
+            initial={{ y: 0 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 10,
+              y: { type: "tween", duration: 0.1 }
             }}
           >
             Express
@@ -193,7 +194,14 @@ export default function WebDevSkills() {
             whileHover={{ 
               scale: 1.05, 
               y: -2, 
-              backgroundColor: "rgba(var(--primary), 0.1)" 
+              backgroundColor: "hsl(var(--primary) / 0.1)" 
+            }}
+            initial={{ y: 0 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 10,
+              y: { type: "tween", duration: 0.1 }
             }}
           >
             RESTful APIs
@@ -204,7 +212,14 @@ export default function WebDevSkills() {
             whileHover={{ 
               scale: 1.05, 
               y: -2, 
-              backgroundColor: "rgba(var(--primary), 0.1)" 
+              backgroundColor: "hsl(var(--primary) / 0.1)" 
+            }}
+            initial={{ y: 0 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 10,
+              y: { type: "tween", duration: 0.1 }
             }}
           >
             Middleware
