@@ -24,7 +24,7 @@ export function ThemeColorToggle() {
   useEffect(() => {
     setMounted(true)
     // Get saved accent from localStorage or use default
-    const savedAccent = localStorage.getItem("accentColor") || "teal"
+    const savedAccent = localStorage.getItem("accentColor") || "amber"
     setCurrentAccent(savedAccent)
   }, [])
 
