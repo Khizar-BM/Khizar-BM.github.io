@@ -47,7 +47,7 @@ export function Header() {
     <header className="fixed top-0 left-0 w-full bg-background/95 border-b border-border z-40">
       <div className="container-custom flex justify-between items-center py-5">
         <a href="#" className="text-xl font-medium">
-          Synerqy
+          Khizar BM
         </a>
         
         {/* Desktop Navigation */}

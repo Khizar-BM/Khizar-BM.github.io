@@ -18,7 +18,7 @@ import {
 export function ThemeColorToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [currentAccent, setCurrentAccent] = useState("teal")
+  const [currentAccent, setCurrentAccent] = useState("amber")
 
   // Ensure component is mounted to avoid hydration mismatch
   useEffect(() => {
